@@ -31,7 +31,6 @@ public class Bow : MonoBehaviour
 
     void Shoot(ObjectAnchor bow)
     {
-        Debug.Log("trying to shoot");
         GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
         newArrow.AddComponent<Rigidbody>();
         newArrow.GetComponent<Rigidbody>().isKinematic = false;

@@ -29,7 +29,7 @@ public class ObjectAnchor : MonoBehaviour
 		heldObjRB.drag = 10;
 		heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
 
-		for (int i = 0; i < collisionBoxes.Length; i++) { collisionBoxes[i].isTrigger = true; }
+		for (int i = 0; i < collisionBoxes.Length; i++) { collisionBoxes[i].enabled = false; }
 
 	}
 
@@ -44,7 +44,7 @@ public class ObjectAnchor : MonoBehaviour
 		heldObjRB.constraints = RigidbodyConstraints.None;
 		heldObjRB.drag = 1;
 
-		for (int i = 0; i < collisionBoxes.Length; i++) { collisionBoxes[i].isTrigger = false; }
+		for (int i = 0; i < collisionBoxes.Length; i++) { collisionBoxes[i].enabled = true; }
 	}
 
 	public bool is_available() { return hand_controller == null; }

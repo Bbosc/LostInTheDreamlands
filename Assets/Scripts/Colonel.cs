@@ -11,13 +11,13 @@ public class Colonel : MonoBehaviour
     protected ObjectAnchor left_grasped = null;
     protected ObjectAnchor right_grasped = null;
     Bow bow;
-    Hammer hammer;
+    Sword sword;
 
     // Start is called before the first frame update
     void Start()
     {
         bow = GameObject.Find("Bow").GetComponent<Bow>();
-        hammer = GameObject.Find("Hammer").GetComponent<Hammer>();
+        sword = GameObject.Find("Sword").GetComponent<Sword>();
         leftHand = GameObject.Find("LeftControllerAnchor").GetComponent<HandController>();
         rightHand = GameObject.Find("RightControllerAnchor").GetComponent<HandController>();
 
@@ -31,20 +31,20 @@ public class Colonel : MonoBehaviour
     {
         left_grasped = leftHand.handle_controller_behavior(anchors_in_the_scene);
         right_grasped = rightHand.handle_controller_behavior(anchors_in_the_scene);
-
-        InteractionManager(leftHand, left_grasped);
-        InteractionManager(rightHand, right_grasped);
+        
+        if (left_grasped != null) InteractionManager(left_grasped);
+        if (right_grasped != null) InteractionManager(right_grasped);
     }
 
-    void InteractionManager(HandController hand, ObjectAnchor object_grasped)
+    void InteractionManager(ObjectAnchor object_grasped)
     {
         switch (object_grasped.name)
         {
             case ("Bow"):
                 bow.GrabBow(object_grasped);
                 break;
-            case ("Hammer"):
-                hammer.GrabHammer(object_grasped);
+            case ("Sword"):
+                sword.GrabSword(object_grasped);
                 break;
         }
     }
