@@ -7,9 +7,9 @@ public class ObjectAnchor : MonoBehaviour
 
 	[Header("Grasping Properties")]
 	public float graspingRadius = 0.1f;
-	private Rigidbody heldObjRB;
+	public Rigidbody heldObjRB;
 	public Collider[] collisionBoxes;
-	public float pickupForce = 150.0f;
+	protected HandController hand_controller = null;
 
 	// Store initial transform parent
 	protected Transform initial_transform_parent;
@@ -21,9 +21,6 @@ public class ObjectAnchor : MonoBehaviour
 		collisionBoxes = GetComponentsInChildren<Collider>();
 	}
 
-
-	// Store the hand controller this object will be attached to
-	protected HandController hand_controller = null;
 
 	public void attach_to(HandController hand_controller)
 	{

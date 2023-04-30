@@ -9,26 +9,27 @@ public class HandController : MonoBehaviour
     public HandType handType;
     [Header("Player Controller")]
     public MainPlayerController playerController;
-    static protected ObjectAnchor[] anchors_in_the_scene;
-    public float shooting_force = 0.0f;
-    protected bool is_hand_closed_previous_frame = false;
+    Bow bowObj;
+    //static protected ObjectAnchor[] anchors_in_the_scene;
+    //protected bool is_hand_closed_previous_frame = false;
     protected ObjectAnchor object_grasped = null;
-    LineRenderer line_r;
+    //LineRenderer line_r;
 
-    [Header("Bow properties")]
-    public GameObject arrow;
-    public float launchForce = 10.0f;
-    public Transform shotPoint;
-    protected bool arrow_knocked = false;
+    //[Header("Bow properties")]
+    //public GameObject arrow;
+    //public float launchForce = 10.0f;
+    //public Transform shotPoint;
+    //protected bool arrow_knocked = false;
 
     void Start()
     {
-        if (anchors_in_the_scene == null) anchors_in_the_scene = GameObject.FindObjectsOfType<ObjectAnchor>();
+        bowObj = GameObject.Find("Bow").GetComponent<Bow>();
+        //if (anchors_in_the_scene == null) anchors_in_the_scene = GameObject.FindObjectsOfType<ObjectAnchor>();
 
     }
 
 
-    bool is_hand_closed()
+    public bool is_hand_closed()
     {
         if (handType == HandType.LeftHand) return
           OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger) > 0.5;     // Check that the middle finger is pressing
@@ -39,11 +40,10 @@ public class HandController : MonoBehaviour
 
     void Update()
     {
-        handle_controller_behavior();
-        // if (Input.GetKey("space")) Shoot();
+
     }
 
-    protected void handle_controller_behavior()
+    public ObjectAnchor handle_controller_behavior(ObjectAnchor[] anchors_in_the_scene)
     {
 
         bool hand_closed = is_hand_closed();
@@ -55,26 +55,33 @@ public class HandController : MonoBehaviour
 
 
 
-        if (hand_closed && (object_grasped == null))
-        {
+        //if (hand_closed && (object_grasped == null))
+        //{
 
-            HandleGrabbing(anchors_in_the_scene);
+        //    HandleGrabbing(anchors_in_the_scene);
 
-        }
-        else if ((object_grasped != null) && !hand_closed)
+        //}
+        //else if ((object_grasped != null) && !hand_closed)
+        //{
+        //    object_grasped.detach_from(this);
+        //    object_grasped = null;
+        //}
+        //else if ((object_grasped != null) && (object_grasped.name == "Bow"))
+        //{
+        //    GrabBow(object_grasped);
+        //}
+        //else if ((object_grasped != null) && (object_grasped.name == "Hammer"))
+        //{
+        //    GrabHammer(object_grasped);
+        //}
+        if (hand_closed && (object_grasped == null)) HandleGrabbing(anchors_in_the_scene);
+        if (!hand_closed && (object_grasped != null))
         {
-            // Debug.LogWarningFormat("{0} released {1}", this.transform.parent.name, object_grasped.name );
             object_grasped.detach_from(this);
             object_grasped = null;
         }
-        else if ((object_grasped != null) && (object_grasped.name == "Bow_01"))
-        {
-            GrabBow(object_grasped);
-        }
-        else if ((object_grasped != null) && (object_grasped.name == "Hammer_01"))
-        {
-            GrabHammer(object_grasped);
-        }
+
+        return object_grasped ;
     }
 
     public void HandleGrabbing(ObjectAnchor[] anchors_in_the_scene)
@@ -107,7 +114,6 @@ public class HandController : MonoBehaviour
             object_grasped = anchors_in_the_scene[best_object_id];
             object_grasped.attach_to(this);
 
-            // if (object_grasped.name == "Bow_01") GrabBow(object_grasped);
         }
 
     }
@@ -116,27 +122,28 @@ public class HandController : MonoBehaviour
     {
         Vector3 handLeftPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
         Vector3 handRightPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
-        // Debug.LogWarningFormat("distance between the two controllers : {0}", Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)));
+
         if (Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)) < 0.2f)
         {
-            arrow_knocked = true;
+            bowObj.arrow_knocked = true;
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
         }
-        if (Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)) > 0.6f && arrow_knocked)
+        if (Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)) > 0.4f && bowObj.arrow_knocked)
         {
             Shoot(bow);
-            arrow_knocked = false;
+            bowObj.arrow_knocked = false;
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
         }
     }
 
     void Shoot(ObjectAnchor bow)
     {
-        GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
+        Debug.Log("trying to shoot");
+        GameObject newArrow = Instantiate(bowObj.arrow, bowObj.shotPoint.position, bowObj.shotPoint.rotation);
         newArrow.AddComponent<Rigidbody>();
         newArrow.GetComponent<Rigidbody>().isKinematic = false;
-        newArrow.GetComponent<Rigidbody>().velocity = (transform.forward) * launchForce;
-        // Debug.LogWarningFormat("bow orientation : {0} ; arrow orientation : {1}", transform.localEulerAngles, newArrow.transform.localEulerAngles);
+        newArrow.GetComponent<Rigidbody>().velocity = (transform.forward) * bowObj.launchForce;
+     
     }
 
     void GrabHammer(ObjectAnchor hammer)
