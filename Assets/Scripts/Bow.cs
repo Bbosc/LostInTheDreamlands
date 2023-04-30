@@ -10,17 +10,6 @@ public class Bow : MonoBehaviour
     public Transform shotPoint;
     public bool arrow_knocked = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Bow started");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void GrabBow(ObjectAnchor bow)
     {
