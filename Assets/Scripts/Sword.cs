@@ -5,8 +5,15 @@ public class Sword : MonoBehaviour
     protected float force_multiplicator = 20.0f;
     private void OnCollisionEnter(Collision col)
     {
-        col.rigidbody.AddForce( - col.GetContact(0).normal * force_multiplicator, ForceMode.Impulse);
-        col.rigidbody.useGravity = true;
+        if (col.gameObject.tag == "projectile")
+        {
+            col.rigidbody.AddForce(-col.GetContact(0).normal * force_multiplicator, ForceMode.Impulse);
+            col.rigidbody.useGravity = true;
+        }
+        else
+        {
+            this.gameObject.GetComponentsInChildren<Collider>();
+        }
 
     }
 
