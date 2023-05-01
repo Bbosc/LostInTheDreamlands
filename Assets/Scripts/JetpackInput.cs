@@ -15,29 +15,18 @@ public class JetpackInput : MonoBehaviour
     public Vector3 CurrentThrust { get => currentThrust; }
 
     public event Action<Vector3> EvtThrustChanged = delegate { };
-    // public event Action<float> EvtThrustChanged = delegate { };
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
-        ThrustInputChanged(0f);
-        
+        ThrustInputChanged(0f);   
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         float newInput = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, m_controller);
-        // if (newInput != currentThrustInput)
-        // {
-            
-        //     ThrustInputChanged(newInput);
-        // }
-        
         ThrustInputChanged(newInput);
     }
     
