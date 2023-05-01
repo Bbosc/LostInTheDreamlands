@@ -7829,6 +7829,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665d07d2268abf3438bf32eefa5bc402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &782628388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782628375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d26f459ec02f944a3df8d783fa0112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentForce: {x: 0, y: 0, z: 0}
+  SpeedApply: {x: 0, y: 0, z: 0}
+  jet01: {fileID: 805089981}
+  jet02: {fileID: 1706585376}
+  addForceMulti: 100
+  maxVelocity: 15
 --- !u!1 &783205928 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1843159997514720, guid: da6e8bbd483d22c449e703a7e40afde4, type: 3}
@@ -8048,6 +8066,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b437f1c2454a2c409b1b7f35e69d661, type: 3}
+--- !u!1 &805089978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 112276, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
+  m_PrefabInstance: {fileID: 1917551976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &805089981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805089978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59e85b9f43aafc47be3198c5f8bf6c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_controller: 1
+  maxThrust: 100
+  Orientation: {x: 0, y: 1, z: 0}
 --- !u!1 &805645423 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1988611399364462, guid: 5f285e9508d4e3f4488b284bb80a0b9b, type: 3}
@@ -15630,6 +15668,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 1ce29e0fa80ac4312a9837582ffebb90, type: 3}
+--- !u!1 &1706585373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 112276, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
+  m_PrefabInstance: {fileID: 93363810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1706585376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706585373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59e85b9f43aafc47be3198c5f8bf6c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_controller: 2
+  maxThrust: 100
+  Orientation: {x: 0, y: 1, z: 0}
 --- !u!1 &1707014207 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1970192842555186, guid: d1958d257c44b484c9bb773aa3b222d1, type: 3}
