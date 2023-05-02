@@ -6,6 +6,7 @@ public class Colonel : MonoBehaviour
 {
 
     static protected ObjectAnchor[] anchors_in_the_scene;
+    static protected Projectile[] projectiles;
     HandController leftHand;
     HandController rightHand;
     protected ObjectAnchor left_grasped = null;
@@ -22,7 +23,8 @@ public class Colonel : MonoBehaviour
         rightHand = GameObject.Find("RightControllerAnchor").GetComponent<HandController>();
 
         if (anchors_in_the_scene == null) anchors_in_the_scene = GameObject.FindObjectsOfType<ObjectAnchor>();
-
+        if (projectiles == null) projectiles = GameObject.FindObjectsOfType<Projectile>();
+        Debug.Log(projectiles.Length);
         Debug.Log("ending the start sequence");
     }
 
@@ -34,6 +36,8 @@ public class Colonel : MonoBehaviour
         
         if (left_grasped != null) InteractionManager(left_grasped);
         if (right_grasped != null) InteractionManager(right_grasped);
+
+        projectiles = GameObject.FindObjectsOfType<Projectile>();
     }
 
     void InteractionManager(ObjectAnchor object_grasped)
@@ -44,8 +48,10 @@ public class Colonel : MonoBehaviour
                 bow.GrabBow(object_grasped);
                 break;
             case ("Sword"):
-                sword.GrabSword(object_grasped);
+                sword.GrabSword(object_grasped, projectiles);
                 break;
         }
     }
 }
+
+//adb logcat Unity:W *:S

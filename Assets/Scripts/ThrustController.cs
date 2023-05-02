@@ -88,23 +88,23 @@ public class ThrustController : MonoBehaviour
             if (Mathf.Abs(velocity.x) < 10f)
             {
                 SpeedApply.x = 0;
-                Debug.Log("X");
+                //Debug.Log("X");
             }
             if (Mathf.Abs(velocity.y) < 10f)
             {
                 SpeedApply.y = 0;
-                Debug.Log("Y");
+                //Debug.Log("Y");
             }
             if (Mathf.Abs(velocity.z) < 10f)
             {
                 SpeedApply.z = 0;
-                Debug.Log("Z");
+                //Debug.Log("Z");
             }
             if (character.collisionFlags != CollisionFlags.None)
             {
                 velocity = Vector3.zero;
             }
-            Debug.Log(velocity);
+            //Debug.Log(velocity);
             character.Move(velocity * Time.deltaTime);
 
             GetComponent<OVRPlayerController>().GravityModifier = gravity;
