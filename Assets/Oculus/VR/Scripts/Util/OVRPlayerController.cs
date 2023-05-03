@@ -92,8 +92,7 @@ public class OVRPlayerController : MonoBehaviour
 	/// <summary>
 	/// Modifies the strength of gravity.
 	/// </summary>
-	// public float GravityModifier = 0.379f;
-	public float GravityModifier = 0.15f;
+	public float GravityModifier = 0.379f;
 
 	/// <summary>
 	/// If true, each OVRPlayerController will use the player's physical height.
@@ -302,7 +301,7 @@ public class OVRPlayerController : MonoBehaviour
 		if (Controller.isGrounded && FallSpeed <= 0)
 			FallSpeed = ((Physics.gravity.y * (GravityModifier * 0.002f)));
 		else
-			FallSpeed += ((Physics.gravity.y * (GravityModifier * 0.0001f)) * SimulationRate * Time.deltaTime);
+			FallSpeed += ((Physics.gravity.y * (GravityModifier * 0.002f)) * SimulationRate * Time.deltaTime);
 
 		moveDirection.y += FallSpeed * SimulationRate * Time.deltaTime;
 
