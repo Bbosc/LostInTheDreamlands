@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hammer
   - projectile
+  - support
   layers:
   - Default
   - TransparentFX

@@ -12,19 +12,13 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         projRB = this.GetComponentInChildren<Rigidbody>();
-        spawnPosition = this.transform.position;
+        spawnPosition = GameObject.Find("BallSupport").transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void launch(Transform launchPosition)
-    {
-        projRB.AddForce(-launchPosition.position.normalized * force_multiplicator, ForceMode.Impulse);
-        projRB.useGravity = true;
     }
 
     public void destroyProjectile()
