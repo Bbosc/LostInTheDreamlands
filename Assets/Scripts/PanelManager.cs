@@ -20,6 +20,7 @@ public class PanelManager : MonoBehaviour
     void Update()
     {
         //if (activePanel != null) buttonHandler(activePanel);
+        if (OVRInput.Get(OVRInput.Button.One)) hidePanel();
         
     }
 
@@ -39,7 +40,7 @@ public class PanelManager : MonoBehaviour
 
     void hidePanel()
     {
-        activePanel.SetActive(false);
+        if (activePanel != null) activePanel.SetActive(false);
         activePanel = null;
     }
 
