@@ -26,6 +26,8 @@ public class Colonel : MonoBehaviour
         if (projectiles == null) projectiles = GameObject.FindObjectsOfType<Projectile>();
         Debug.Log(projectiles.Length);
         Debug.Log("ending the start sequence");
+
+        GameObject.Find("FX_Explosion_Red").gameObject.SetActive(false);
     }
 
     // Update is called once per frame

@@ -3,27 +3,14 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     protected float force_multiplicator = 20.0f;
-    ObjectAnchor anchor;
-    Collision lastCollision = null;
+    public GameObject hitAnimation;
     Collider[] colliders = null;
-    int colliderCount = 0;
-    bool is_available = true;
-    bool not_projectile = false;
     
     private void Start()
     {
-        anchor = GetComponent<ObjectAnchor>();
         colliders = gameObject.GetComponentsInChildren<Collider>();
-        //for (int i = 0; i < colliders.Length; i++) { colliders[i].enabled = true; }
     }
 
-    private void Update()
-    {
-        is_available = anchor.is_available();
-
-
-       
-    }
 
     private void OnCollisionEnter(Collision col)
     {
@@ -32,6 +19,9 @@ public class Sword : MonoBehaviour
         {
             col.rigidbody.AddForce(-col.GetContact(0).normal * force_multiplicator, ForceMode.Impulse);
             col.rigidbody.useGravity = true;
+            GameObject anim = Instantiate(hitAnimation, col.rigidbody.transform.position, Quaternion.identity);
+            anim.transform.SetParent(col.collider.transform);
+            //heldObjRB.transform.parent = col.collider.transform;
         }
 
     }
@@ -41,8 +31,6 @@ public class Sword : MonoBehaviour
         for (int i = 0; i < projectiles.Length; i++)
         {
             threshold = projectiles[i].gameObject.transform.localScale.x;
-            Debug.LogWarningFormat("target distance : {0}", threshold);
-            Debug.LogWarningFormat("actual distance : {0}", Vector3.Distance(gameObject.transform.position, projectiles[i].transform.position));
             if (Vector3.Distance(gameObject.transform.position, projectiles[i].transform.position) < threshold + 0.2)
             {
                 for (int j = 0; j < colliders.Length; j++) { colliders[j].enabled = true; }
