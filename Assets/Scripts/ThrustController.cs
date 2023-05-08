@@ -17,21 +17,16 @@ public class ThrustController : MonoBehaviour
     [SerializeField]
     private float maxVelocity = 10f;
     private Vector3 velocity = Vector3.zero;
-    private Vector3 Friction = Vector3.zero;
 
     private float gravity = 0f;
 
-    public CharacterController character;
+    private CharacterController character;
 
     void Start()
     {
         character = GetComponent<CharacterController>();
         rigidBody = GetComponent<Rigidbody>();
         gravity = GetComponent<OVRPlayerController>().GravityModifier;
-
-        Friction.x = 3f;
-        Friction.y = 3f;
-        Friction.z = 3f;
 
     }
 
@@ -59,26 +54,43 @@ public class ThrustController : MonoBehaviour
     {
 
 
+        // if (currentForce != Vector3.zero)
+        // {
+        //     rigidBody.AddForce(currentForce);
+
+        //     Vector3 velocity = rigidBody.velocity;
+        //     Vector3 velocity_test = rigidBody.velocity;
+        //     velocity = new Vector3(Mathf.Clamp(velocity.x, -maxVelocity, maxVelocity), 
+        //                         Mathf.Clamp(velocity.y, -maxVelocity, maxVelocity), 
+        //                         Mathf.Clamp(velocity.z, -maxVelocity, maxVelocity));
+        //     GetComponent<OVRPlayerController>().GravityModifier = 0f;
+        //     character.enabled = false;
+        //     rigidBody.velocity = velocity;
+        //     TestVeloctity = velocity;
+        //     velocity_test = rigidBody.velocity;
+        //     Debug.Log("force");
+        //     Debug.Log(currentForce);
+        //     Debug.Log("velo");
+        //     Debug.Log(velocity);
+
+        // }else{
+        //     character.enabled = true;
+        //     Debug.Log("gravity");
+        //     Debug.Log(gravity);
+        //     character.Move(Vector3.zero);
+        //     GetComponent<OVRPlayerController>().GravityModifier = gravity;
+        // }
+
         if (currentForce != Vector3.zero) 
         {   
-            
             SpeedApply = currentForce/100f;
             GetComponent<OVRPlayerController>().GravityModifier = 0;
             velocity += SpeedApply;
-            velocity = velocity*0.9f;
-
-            //velocity = (velocity - Friction);
-
             velocity = new Vector3(Mathf.Clamp(velocity.x, -maxVelocity, maxVelocity), 
                     Mathf.Clamp(velocity.y, -maxVelocity, maxVelocity), 
                     Mathf.Clamp(velocity.z, -maxVelocity, maxVelocity));
             Debug.Log(velocity);
             character.Move(velocity * Time.deltaTime);
-            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
-            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
-
-
-
         }else{
 
             velocity -= SpeedApply;
@@ -87,30 +99,29 @@ public class ThrustController : MonoBehaviour
                     Mathf.Clamp(velocity.z, -maxVelocity, maxVelocity));
 
             // check if velocity is close to zero in all 3 axis
-            
-            
-
             if (Mathf.Abs(velocity.x) < 10f)
             {
                 SpeedApply.x = 0;
+                Debug.Log("X");
             }
             if (Mathf.Abs(velocity.y) < 10f)
             {
                 SpeedApply.y = 0;
+                Debug.Log("Y");
             }
             if (Mathf.Abs(velocity.z) < 10f)
             {
                 SpeedApply.z = 0;
+                Debug.Log("Z");
             }
             if (character.collisionFlags != CollisionFlags.None)
             {
                 velocity = Vector3.zero;
             }
+            Debug.Log(velocity);
             character.Move(velocity * Time.deltaTime);
 
-            GetComponent<OVRPlayerController>().GravityModifier = gravity;
-            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
-            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+            GetComponent<OVRPlayerController>().GravityModifier = gravity/2;
             // character.Move(Vector3.zero);
         }
 
