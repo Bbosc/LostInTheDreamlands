@@ -21,7 +21,7 @@ public class ThrustController : MonoBehaviour
 
     private float gravity = 0f;
 
-    private CharacterController character;
+    public CharacterController character;
 
     void Start()
     {
@@ -48,6 +48,11 @@ public class ThrustController : MonoBehaviour
 
 
     }
+
+
+
+    public Vector3 TestVeloctity;
+
 
 
     private void FixedUpdate()
@@ -88,28 +93,25 @@ public class ThrustController : MonoBehaviour
             if (Mathf.Abs(velocity.x) < 10f)
             {
                 SpeedApply.x = 0;
-                //Debug.Log("X");
             }
             if (Mathf.Abs(velocity.y) < 10f)
             {
                 SpeedApply.y = 0;
-                //Debug.Log("Y");
             }
             if (Mathf.Abs(velocity.z) < 10f)
             {
                 SpeedApply.z = 0;
-                //Debug.Log("Z");
             }
             if (character.collisionFlags != CollisionFlags.None)
             {
                 velocity = Vector3.zero;
             }
-            //Debug.Log(velocity);
             character.Move(velocity * Time.deltaTime);
 
             GetComponent<OVRPlayerController>().GravityModifier = gravity;
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+            // character.Move(Vector3.zero);
         }
 
     }
@@ -118,6 +120,9 @@ public class ThrustController : MonoBehaviour
     {
         jet01.EvtThrustChanged -= ChangeForce;
         jet02.EvtThrustChanged -= ChangeForce;
+
+        // Debug.Log("force");
+        // Debug.Log(currentForce);
 
     }
 
