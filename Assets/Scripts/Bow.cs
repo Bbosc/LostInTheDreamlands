@@ -10,6 +10,13 @@ public class Bow : MonoBehaviour
     public Transform shotPoint;
     public bool arrow_knocked = false;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            Shoot();
+        }
+    }
 
     public void GrabBow(ObjectAnchor bow)
     {
@@ -23,18 +30,21 @@ public class Bow : MonoBehaviour
         }
         if (Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)) > 0.4f && arrow_knocked)
         {
-            Shoot(bow);
+            Shoot();
             arrow_knocked = false;
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
         }
     }
 
-    void Shoot(ObjectAnchor bow)
+    void Shoot()
     {
         GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
         newArrow.AddComponent<Rigidbody>();
         newArrow.GetComponent<Rigidbody>().isKinematic = false;
-        newArrow.GetComponent<Rigidbody>().velocity = (transform.forward) * launchForce;
+        //newArrow.GetComponent<Rigidbody>().rotation = shotPoint.rotation;
+        newArrow.GetComponent<Rigidbody>().transform.Rotate(90, 0, 0, Space.Self);
+        //newArrow.GetComponent<Rigidbody>().velocity = (transform.forward) * launchForce;
+        newArrow.GetComponent<Rigidbody>().velocity = (-transform.right) * launchForce;
 
     }
 }

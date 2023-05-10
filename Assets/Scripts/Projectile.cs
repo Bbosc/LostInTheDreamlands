@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     Rigidbody projRB;
     Vector3 spawnPosition;
     public Material projectileMaterial;
-    static int force_multiplicator = 20;
+    static int force_multiplicator = 2;
     void Start()
     {
         projRB = this.GetComponentInChildren<Rigidbody>();
@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
     {
         
     }
+
 
     public void launch(Transform launchPosition)
     {
