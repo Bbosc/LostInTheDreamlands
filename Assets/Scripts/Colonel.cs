@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// log only warnings : adb logcat Unity:W *:S
+// log all informations : adb logcat Unity:I *:S
+
 public class Colonel : MonoBehaviour
 {
 

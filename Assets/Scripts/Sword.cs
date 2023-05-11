@@ -5,71 +5,46 @@ public class Sword : MonoBehaviour
     protected float force_multiplicator = 20.0f;
     GameObject[] projectiles;
     ObjectAnchor sword_anchor;
-    Vector3 basic_pos;
     float dist = 0.0f;
-
-    private void Update()
-    {
-        projectiles = GameObject.FindGameObjectsWithTag("projectile");
-        for (int i = 0; i < projectiles.Length; i++)
-        {
-            dist = Vector3.Distance(this.gameObject.transform.position, projectiles[i].gameObject.transform.position);
-            if (dist < 0.6)
-            {
-                for (int j = 0; j < sword_anchor.collisionBoxes.Length; j++) { sword_anchor.collisionBoxes[j].enabled = true; }
-            }
-            else if (!sword_anchor.is_available())
-            {
-                for (int j = 0; j < sword_anchor.collisionBoxes.Length; j++) { sword_anchor.collisionBoxes[j].enabled = false; }
-            }
-
-        }
-    }
 
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "projectile")
+        if (col.gameObject.CompareTag("projectile"))
         {
             col.rigidbody.AddForce(-col.GetContact(0).normal * force_multiplicator, ForceMode.Impulse);
             col.rigidbody.useGravity = true;
         }
-        else
-        {
-            this.gameObject.GetComponentsInChildren<Collider>();
-        }
 
     }
 
+
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "projectile")
+        if (collision.gameObject.CompareTag("projectile"))
         {
-            //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            GameObject.Find("Sword").transform.position = basic_pos;
-            this.gameObject.transform.position = basic_pos;
+            transform.position = sword_anchor.get_controller_position();
         }
     }
 
     public void GrabSword(ObjectAnchor sword)
     {
-        //GameObject[] projectiles = GameObject.FindGameObjectsWithTag("projectile");
-
+        projectiles = GameObject.FindGameObjectsWithTag("projectile");
         sword_anchor = sword;
-        basic_pos = sword.gameObject.transform.position;
-        //float dist = 0.0f;
-        //for (int i = 0; i < projectiles.Length; i++)
-        //{
-        //    dist = Vector3.Distance(sword.gameObject.transform.position, projectiles[i].gameObject.transform.position);
-        //    if (dist < 0.6)
-        //    {
-        //        for (int j = 0; j < sword.collisionBoxes.Length; j++) { sword.collisionBoxes[j].enabled = true; }
-        //    } else
-        //    {
-        //        for (int j = 0; j < sword.collisionBoxes.Length; j++) { sword.collisionBoxes[j].enabled = false; }
-        //    }
+        for (int i = 0; i < projectiles.Length; i++)
+        {
+            dist = Vector3.Distance(sword.gameObject.transform.position, projectiles[i].gameObject.transform.position);
+            if (dist < 0.6)
+            {
+                foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
+            }
+            else
+            {
+                foreach (Collider col in sword.collisionBoxes) { col.enabled = false; }
+                transform.position = sword_anchor.get_controller_position();
+            }
 
-        //}
+        }
 
     }
 }

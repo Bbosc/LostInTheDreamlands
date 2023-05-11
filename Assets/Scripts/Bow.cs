@@ -41,9 +41,7 @@ public class Bow : MonoBehaviour
         GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
         newArrow.AddComponent<Rigidbody>();
         newArrow.GetComponent<Rigidbody>().isKinematic = false;
-        //newArrow.GetComponent<Rigidbody>().rotation = shotPoint.rotation;
         newArrow.GetComponent<Rigidbody>().transform.Rotate(90, 0, 0, Space.Self);
-        //newArrow.GetComponent<Rigidbody>().velocity = (transform.forward) * launchForce;
         newArrow.GetComponent<Rigidbody>().velocity = (-transform.right) * launchForce;
 
     }

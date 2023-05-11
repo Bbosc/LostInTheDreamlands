@@ -50,4 +50,11 @@ public class ObjectAnchor : MonoBehaviour
 	public bool is_available() { return hand_controller == null; }
 
 	public float get_grasping_radius() { return graspingRadius; }
+
+	public HandController.HandType get_hand_type() { return hand_controller.handType; }
+
+	public Vector3 get_controller_position() { return hand_controller.transform.position; }
+	public Quaternion get_controller_orientation() { return hand_controller.transform.rotation; }
+
+	public HandController get_controller() { return hand_controller; }
 }
