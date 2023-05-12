@@ -8,12 +8,15 @@ public class PanelManager : MonoBehaviour
     // Start is called before the first frame update
     Transform canvas = null;
     GameObject activePanel = null;
+    OVRCameraRig cameraRig;
     int activePanelIndex = -1;
     void Start()
     {
         canvas = this.gameObject.GetComponentInChildren<RectTransform>();
-        //showPanel("Sword");
-        
+        cameraRig = FindObjectOfType<OVRCameraRig>();
+        canvas.transform.position = cameraRig.centerEyeAnchor.position + new Vector3(0, 2, -3);
+        showPanel("Sword");
+
     }
 
     // Update is called once per frame

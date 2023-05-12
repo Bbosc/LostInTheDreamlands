@@ -7,6 +7,10 @@ public class Sword : MonoBehaviour
     ObjectAnchor sword_anchor;
     float dist = 0.0f;
 
+    private void Start()
+    {
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+    }
 
     private void OnCollisionEnter(Collision col)
     {
@@ -29,6 +33,7 @@ public class Sword : MonoBehaviour
 
     public void GrabSword(ObjectAnchor sword)
     {
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
         projectiles = GameObject.FindGameObjectsWithTag("projectile");
         Debug.LogWarning(projectiles.Length);
         sword_anchor = sword;
