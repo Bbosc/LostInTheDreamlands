@@ -5,42 +5,54 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    Rigidbody projRB;
     Vector3 spawnPosition;
     public Material projectileMaterial;
-    static int force_multiplicator = 2;
+    public GameObject explosionPrefab;
+
+
     void Start()
     {
-        projRB = this.GetComponentInChildren<Rigidbody>();
         spawnPosition = this.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Vector3.Distance(this.transform.position, spawnPosition) > 50)
+        {
+            destroyProjectile();
+        }
     }
 
 
-    public void launch(Transform launchPosition)
+    private void OnCollisionEnter(Collision collision)
     {
-        projRB.AddForce(-launchPosition.position.normalized * force_multiplicator, ForceMode.Impulse);
-        projRB.useGravity = true;
+        if (collision.gameObject.CompareTag("target"))
+        {
+            explode(collision.GetContact(0).point);
+            destroyProjectile();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+       if (collision.gameObject.CompareTag("target"))
+        {
+        }
     }
 
     public void destroyProjectile()
     {
-        createProjectile();
-        Destroy(this);
+        for (var i = gameObject.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(gameObject.transform.GetChild(i).gameObject);
+        }
+        Destroy(gameObject);
+        
     }
 
-    void createProjectile()
+
+    void explode(Vector3 position)
     {
-        GameObject newProjectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        newProjectile.transform.position = spawnPosition;
-        newProjectile.GetComponent<Rigidbody>().useGravity = false;
-        newProjectile.AddComponent<MeshRenderer>();
-        newProjectile.GetComponent<MeshRenderer>().material = projectileMaterial;
-        newProjectile.AddComponent<Projectile>();
+        Destroy(Instantiate(explosionPrefab, position, Quaternion.identity), 1f);
     }
 }

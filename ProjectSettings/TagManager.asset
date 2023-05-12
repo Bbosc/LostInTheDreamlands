@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hammer
   - projectile
+  - Container
+  - Sword
+  - target
   layers:
   - Default
   - TransparentFX

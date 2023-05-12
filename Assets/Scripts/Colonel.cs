@@ -26,7 +26,6 @@ public class Colonel : MonoBehaviour
 
         if (anchors_in_the_scene == null) anchors_in_the_scene = GameObject.FindObjectsOfType<ObjectAnchor>();
 
-        Debug.Log("ending the start sequence");
     }
 
     // Update is called once per frame

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    protected float force_multiplicator = 20.0f;
+    protected float force_multiplicator = 10.0f;
     GameObject[] projectiles;
     ObjectAnchor sword_anchor;
     float dist = 0.0f;
@@ -30,11 +30,12 @@ public class Sword : MonoBehaviour
     public void GrabSword(ObjectAnchor sword)
     {
         projectiles = GameObject.FindGameObjectsWithTag("projectile");
+        Debug.LogWarning(projectiles.Length);
         sword_anchor = sword;
         for (int i = 0; i < projectiles.Length; i++)
         {
             dist = Vector3.Distance(sword.gameObject.transform.position, projectiles[i].gameObject.transform.position);
-            if (dist < 0.6)
+            if (dist < 0.8)
             {
                 foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
             }
