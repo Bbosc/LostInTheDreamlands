@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    protected float force_multiplicator = 10.0f;
+    protected float force_multiplicator = 15.0f;
     GameObject[] projectiles;
     ObjectAnchor sword_anchor;
     float dist = 0.0f;
