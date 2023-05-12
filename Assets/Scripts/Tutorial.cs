@@ -6,19 +6,28 @@ using UnityEngine.UI;
 public class Tutorial : MonoBehaviour
 {
     Transform canva = null;
-    GameObject[] panels;
+    string[] panelNames = {"Introduction", "Introduction (1)", "Introduction (2)", "Introduction (3)",
+                                "Bow", "Sword", "Grabbing", "Prompt", "DistanceGrab", "Jetpack"};
+    List<GameObject> panels = new List<GameObject>();
     GameObject[] interactors;
     PanelManager pManager;
     OVRCameraRig cameraRig;
     int activePanelIndex = 0;
+    bool pushed_previous_frame = false;
     // Start is called before the first frame update
     void Start()
     {
+        
         canva = gameObject.GetComponentInChildren<RectTransform>();
         pManager = canva.GetComponent<PanelManager>();
-        panels = GameObject.FindGameObjectsWithTag("panel");
+        //panels = GameObject.FindGameObjectsWithTag("panel");
+        foreach (string name in panelNames)
+        {
+            panels.Add(GameObject.Find(name));
+        }
         interactors = GameObject.FindGameObjectsWithTag("interactor");
         foreach (GameObject t in panels) { t.SetActive(false); }
+        foreach (GameObject t in panels) { Debug.LogWarning(t.name); }
         foreach (GameObject t in interactors) { t.SetActive(false); }
 
         cameraRig = FindObjectOfType<OVRCameraRig>();
@@ -33,22 +42,28 @@ public class Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (OVRInput.Get(OVRInput.Button.One))
-        //{
-        //    hidePanel();
-        //    activePanelIndex += 1;
-        //    showPanel();
-        //}
-        //if (OVRInput.Get(OVRInput.Button.Two))
-        //{
-        //    hidePanel();
-        //    activePanelIndex -= 1;
-        //    showPanel();
-        //}
+        if (OVRInput.Get(OVRInput.Button.One) && (!pushed_previous_frame))
+        {
+            hidePanel();
+            activePanelIndex += 1;
+            showPanel();
+            pushed_previous_frame = true;
+        }
+        if (OVRInput.Get(OVRInput.Button.Two) && (!pushed_previous_frame))
+        {
+            hidePanel();
+            activePanelIndex -= 1;
+            showPanel();
+            pushed_previous_frame = true;
+        }
+
+        if (!OVRInput.Get(OVRInput.Button.Two) && !OVRInput.Get(OVRInput.Button.One)) pushed_previous_frame = false;
+
+
+
 
         if (Input.GetKeyDown("a"))
         {
-            Debug.Log("should go to the next one");
             hidePanel();
             activePanelIndex += 1;
             showPanel();
@@ -59,6 +74,7 @@ public class Tutorial : MonoBehaviour
             activePanelIndex -= 1;
             showPanel();
         }
+        Debug.LogWarningFormat("active panel : {0}", panels[activePanelIndex].name);
     }
 
     void showPanel()
