@@ -8,6 +8,8 @@ TagManager:
   - Container
   - Sword
   - target
+  - panel
+  - interactor
   layers:
   - Default
   - TransparentFX
