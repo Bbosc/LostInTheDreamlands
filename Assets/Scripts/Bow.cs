@@ -42,6 +42,7 @@ public class Bow : MonoBehaviour
         newArrow.AddComponent<Rigidbody>();
         newArrow.GetComponent<Rigidbody>().isKinematic = false;
         newArrow.GetComponent<Rigidbody>().useGravity = true;
+        newArrow.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
         newArrow.GetComponent<Rigidbody>().transform.Rotate(90, 0, 0, Space.Self);
         newArrow.GetComponent<Rigidbody>().velocity = (-transform.right) * launchForce;
         newArrow.GetComponent<MeshCollider>().convex = true;
