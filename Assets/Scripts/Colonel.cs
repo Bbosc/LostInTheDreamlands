@@ -30,23 +30,39 @@ public class Colonel : MonoBehaviour
         if (anchors_in_the_scene == null) anchors_in_the_scene = FindObjectsOfType<ObjectAnchor>();
 
         for (int i = 0; i < 5; i ++) { tutorials_passed.Add(false); } // 5 for the number of interactions;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.LogWarning(Vector3.Distance(leftHand.gameObject.transform.position, new Vector3(0, 9, 42)));
         left_grasped = leftHand.handle_controller_behavior(anchors_in_the_scene);
         right_grasped = rightHand.handle_controller_behavior(anchors_in_the_scene);
 
         if (left_grasped != null) InteractionManager(left_grasped);
         if (right_grasped != null) InteractionManager(right_grasped);
 
-        if (tutorials_passed[2] && (Vector3.Distance(GameObject.Find("Cube").transform.position, GameObject.Find("TreeStump").transform.position) < 0.5))
-        {
-            tutorials_passed[3] = true;
-        }
 
         if (tutorials_passed[tutorial_stage]) tutorial_stage += 1;
+
+        if (tutorials_passed[2])
+        {
+            GameObject.Find("TreeStump").transform.position = GameObject.Find("DistanceGrabSupport").transform.position;
+
+            if (Vector3.Distance(GameObject.Find("Cubedist").gameObject.transform.position, GameObject.Find("TreeStump").gameObject.transform.position) < 0.8)
+            {
+                tutorials_passed[3] = true;
+                tutorial_stage += 1;
+            }
+        }
+        Debug.LogWarning(Vector3.Distance(leftHand.gameObject.transform.position, new Vector3(0, 9, 42)));
+
+        if (Vector3.Distance(leftHand.gameObject.transform.position, new Vector3(0, 9, 42)) < 5)
+        {
+            Debug.LogWarning("should load new scene");
+            Debug.LogWarning("scene should be loaded");
+        }
 
     }
 
