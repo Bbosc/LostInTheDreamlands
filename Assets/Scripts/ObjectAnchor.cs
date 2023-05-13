@@ -11,6 +11,7 @@ public class ObjectAnchor : MonoBehaviour
 	public Collider[] collisionBoxes;
 	protected HandController hand_controller = null;
 	protected Transform initial_transform_parent;
+	bool tutorial_completed = false;
 
 	void Start()
 	{
@@ -30,7 +31,7 @@ public class ObjectAnchor : MonoBehaviour
 		heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
 
 		for (int i = 0; i < collisionBoxes.Length; i++) { collisionBoxes[i].enabled = false; }
-
+		if (heldObjRB.gameObject.name == "Axe") tutorial_completed = true;
 	}
 
 	public void detach_from(HandController hand_controller)
@@ -57,4 +58,6 @@ public class ObjectAnchor : MonoBehaviour
 	public Quaternion get_controller_orientation() { return hand_controller.transform.rotation; }
 
 	public HandController get_controller() { return hand_controller; }
+
+	public bool is_tutorial_completed() { return tutorial_completed; }
 }

@@ -7,6 +7,7 @@ public class ProjectileManager : MonoBehaviour
     Vector3 spawnPosition;
     public Material projectileMaterial;
     public GameObject explosionPrefab;
+    bool tutorial_completed = false;
     // Start is called before the first frame update
     void Start()
     {

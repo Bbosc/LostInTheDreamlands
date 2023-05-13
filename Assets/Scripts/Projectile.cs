@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour
     public Material projectileMaterial;
     public GameObject explosionPrefab;
 
-
     void Start()
     {
         spawnPosition = this.transform.position;
@@ -29,6 +28,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("target"))
         {
             explode(collision.GetContact(0).point);
+            GameObject.Find("Sword_").GetComponent<Sword>().tutorial_completed = true;
             destroyProjectile();
         }
     }
@@ -55,4 +55,5 @@ public class Projectile : MonoBehaviour
     {
         Destroy(Instantiate(explosionPrefab, position, Quaternion.identity), 1f);
     }
+
 }

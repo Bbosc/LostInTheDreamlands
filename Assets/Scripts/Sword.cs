@@ -6,6 +6,7 @@ public class Sword : MonoBehaviour
     GameObject[] projectiles;
     ObjectAnchor sword_anchor;
     float dist = 0.0f;
+    public bool tutorial_completed = false;
 
     private void Start()
     {
@@ -53,4 +54,6 @@ public class Sword : MonoBehaviour
         }
 
     }
+
+    public bool is_tutorial_completed() { return tutorial_completed; }
 }

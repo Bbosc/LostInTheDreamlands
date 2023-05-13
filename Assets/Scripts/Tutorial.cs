@@ -6,60 +6,65 @@ using UnityEngine.UI;
 public class Tutorial : MonoBehaviour
 {
     Transform canva = null;
-    string[] panelNames = {"Introduction", "Introduction (1)", "Introduction (2)", "Introduction (3)",
-                                "Bow", "Sword", "Grabbing", "Prompt", "DistanceGrab", "Jetpack"};
+    string[] panelNames = {"Introduction", "Introduction (1)", "Introduction (2)", "Introduction (3)", "Grabbing",
+                                "Prompt", "Sword", "Bow", "DistanceGrab", "Jetpack"};
     List<GameObject> panels = new List<GameObject>();
     GameObject[] interactors;
-    PanelManager pManager;
-    OVRCameraRig cameraRig;
     int activePanelIndex = 0;
     bool pushed_previous_frame = false;
+    Colonel colonel;
+    int tutorial_stage = 0;
+    int previous_stage = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        colonel = FindObjectOfType<Colonel>();
         canva = gameObject.GetComponentInChildren<RectTransform>();
-        pManager = canva.GetComponent<PanelManager>();
-        //panels = GameObject.FindGameObjectsWithTag("panel");
         foreach (string name in panelNames)
         {
             panels.Add(GameObject.Find(name));
         }
         interactors = GameObject.FindGameObjectsWithTag("interactor");
         foreach (GameObject t in panels) { t.SetActive(false); }
-        foreach (GameObject t in panels) { Debug.LogWarning(t.name); }
         foreach (GameObject t in interactors) { t.SetActive(false); }
 
-        cameraRig = FindObjectOfType<OVRCameraRig>();
-        //canva.transform.parent = cameraRig.transform;
-        //canva.transform.rotation = cameraRig.transform.rotation;
-        //canva.transform.position = new Vector3(0, 2, 3);
-        
-
+      
         showPanel();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.One) && (!pushed_previous_frame))
+        tutorial_stage = colonel.get_tutorial_state();
+        if (tutorial_stage != previous_stage)
         {
             hidePanel();
             activePanelIndex += 1;
             showPanel();
             pushed_previous_frame = true;
+            previous_stage = tutorial_stage;
         }
-        if (OVRInput.Get(OVRInput.Button.Two) && (!pushed_previous_frame))
+        if (activePanelIndex < 5)
         {
-            hidePanel();
-            activePanelIndex -= 1;
-            showPanel();
-            pushed_previous_frame = true;
+            if (OVRInput.Get(OVRInput.Button.One) && (!pushed_previous_frame))
+            {
+                hidePanel();
+                activePanelIndex += 1;
+                showPanel();
+                pushed_previous_frame = true;
+            }
+            if (OVRInput.Get(OVRInput.Button.Two) && (!pushed_previous_frame))
+            {
+                hidePanel();
+                activePanelIndex -= 1;
+                showPanel();
+                pushed_previous_frame = true;
+            }
+            if (!OVRInput.Get(OVRInput.Button.Two) && !OVRInput.Get(OVRInput.Button.One)) pushed_previous_frame = false;
         }
 
-        if (!OVRInput.Get(OVRInput.Button.Two) && !OVRInput.Get(OVRInput.Button.One)) pushed_previous_frame = false;
-
-
+        
 
 
         if (Input.GetKeyDown("a"))
@@ -74,11 +79,11 @@ public class Tutorial : MonoBehaviour
             activePanelIndex -= 1;
             showPanel();
         }
-        Debug.LogWarningFormat("active panel : {0}", panels[activePanelIndex].name);
     }
 
     void showPanel()
     {
+        if (activePanelIndex > 0) set_panel_position(panels[activePanelIndex-1].name);
         panels[activePanelIndex].SetActive(true);
         panels[activePanelIndex].GetComponentInChildren<Button>().onClick.AddListener(hidePanel);
         activateSupport(panels[activePanelIndex].name, true);
@@ -113,7 +118,7 @@ public class Tutorial : MonoBehaviour
                     }
                 }
                 break;
-            case ("Axe"):
+            case ("Prompt"):
                 foreach (GameObject go in interactors)
                 {
                     if (go.name == "AxeSupport")
@@ -125,6 +130,19 @@ public class Tutorial : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    void set_panel_position(string support_name)
+    {
+        foreach (GameObject go in interactors)
+        {
+            if (go.name == support_name + "Support")
+            {
+                canva.transform.position = go.transform.position + Vector3.up;
+                Debug.LogWarningFormat("position of the panel : {0}", canva.transform.position);
+                canva.transform.LookAt(GameObject.Find("OVRPlayerController").transform);
+            }
         }
     }
 }

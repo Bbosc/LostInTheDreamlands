@@ -8,7 +8,8 @@ public class Bow : MonoBehaviour
     public GameObject arrow;
     public float launchForce = 10.0f;
     public Transform shotPoint;
-    public bool arrow_knocked = false;
+    bool arrow_knocked = false;
+    bool tutorial_completed = false;
 
     private void Update()
     {
@@ -22,7 +23,7 @@ public class Bow : MonoBehaviour
     {
         Vector3 handLeftPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
         Vector3 handRightPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
-
+        Debug.LogWarningFormat("distance between controllers : {0}", Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)));
         if (Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)) < 0.2f)
         {
             arrow_knocked = true;
@@ -33,6 +34,7 @@ public class Bow : MonoBehaviour
             Shoot();
             arrow_knocked = false;
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+            tutorial_completed = true;
         }
     }
 
@@ -48,4 +50,6 @@ public class Bow : MonoBehaviour
         newArrow.GetComponent<MeshCollider>().convex = true;
         newArrow.AddComponent<Arrow>();
     }
+
+    public bool is_tutorial_completed() { return tutorial_completed; }
 }
