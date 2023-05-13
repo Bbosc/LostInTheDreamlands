@@ -6,11 +6,13 @@ TagManager:
   tags:
   - Hammer
   - projectile
+  - Container
+  - Fruit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Fruits
   - Water
   - UI
   - 
