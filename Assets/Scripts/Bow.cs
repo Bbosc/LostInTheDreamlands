@@ -6,7 +6,7 @@ public class Bow : MonoBehaviour
 {
     [Header("Bow properties")]
     public GameObject arrow;
-    public float launchForce = 10.0f;
+    public float launchForce = 18.0f;
     public Transform shotPoint;
     bool arrow_knocked = false;
     public bool tutorial_completed = false;

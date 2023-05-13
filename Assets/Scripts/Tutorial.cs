@@ -128,6 +128,26 @@ public class Tutorial : MonoBehaviour
                     }
                 }
                 break;
+            case ("DistanceGrab"):
+                foreach (GameObject go in interactors)
+                {
+                    if (go.name == "DistanceGrabSupport")
+                    {
+                        go.SetActive(value);
+                        break;
+                    }
+                }
+                break;
+            case ("Jetpack"):
+                foreach (GameObject go in interactors)
+                {
+                    if (go.name == "JetpackSupport")
+                    {
+                        go.SetActive(value);
+                        break;
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -139,13 +159,13 @@ public class Tutorial : MonoBehaviour
         {
             if (go.name == support_name + "Support")
             {
-                canva.transform.position = go.transform.position + Vector3.up;
+                canva.transform.position = go.transform.position + 2*Vector3.up + 2*Vector3.forward;
                 canva.transform.LookAt(GameObject.Find("OVRPlayerController").transform);
                 canva.transform.Rotate(0, 180, 0);
             }
             if ((support_name == "Prompt") && (go.name == "AxeSupport"))
             {
-                canva.transform.position = go.transform.position + Vector3.up;
+                canva.transform.position = go.transform.position + 2 * Vector3.up + 2*Vector3.forward;
                 canva.transform.LookAt(GameObject.Find("OVRPlayerController").transform);
                 canva.transform.Rotate(0, 180, 0);
             }

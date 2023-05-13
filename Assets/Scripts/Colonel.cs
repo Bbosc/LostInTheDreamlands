@@ -41,7 +41,13 @@ public class Colonel : MonoBehaviour
         if (left_grasped != null) InteractionManager(left_grasped);
         if (right_grasped != null) InteractionManager(right_grasped);
 
+        if (tutorials_passed[2] && (Vector3.Distance(GameObject.Find("Cube").transform.position, GameObject.Find("TreeStump").transform.position) < 0.5))
+        {
+            tutorials_passed[3] = true;
+        }
+
         if (tutorials_passed[tutorial_stage]) tutorial_stage += 1;
+
     }
 
     void InteractionManager(ObjectAnchor object_grasped)

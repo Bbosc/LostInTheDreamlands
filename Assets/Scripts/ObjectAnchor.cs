@@ -9,13 +9,16 @@ public class ObjectAnchor : MonoBehaviour
 	public float graspingRadius = 0.1f;
 	public Rigidbody heldObjRB;
 	public Collider[] collisionBoxes;
+	public Transform trackingSpace;
 	protected HandController hand_controller = null;
 	protected Transform initial_transform_parent;
 	bool tutorial_completed = false;
+	protected distanceGrab dist_grab = null;
 
 	void Start()
 	{
 		initial_transform_parent = transform.parent;
+		trackingSpace = GameObject.Find("TrackingSpace").transform;
 		heldObjRB = GetComponent<Rigidbody>();
 		collisionBoxes = GetComponentsInChildren<Collider>();
 	}
@@ -46,6 +49,42 @@ public class ObjectAnchor : MonoBehaviour
 		heldObjRB.drag = 1;
 
 		foreach (Collider v in collisionBoxes) { v.enabled = true; }
+	}
+
+	public void attach_to_distance(distanceGrab dist_grab)
+	{
+		// Store the hand controller in memory
+		this.dist_grab = dist_grab;
+		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		rigidbody.useGravity = false;
+		rigidbody.isKinematic = true;
+
+		// Set the object to be placed in the hand controller referential
+		transform.SetParent(dist_grab.transform);
+	}
+
+	public void detach_from_distance(distanceGrab dist_grab, distanceGrab.HandType handType)
+	{
+		// Make sure that the right hand controller ask for the release
+		if (this.dist_grab != dist_grab) return;
+
+		// Set the object to be placed in the original transform parent
+		transform.SetParent(initial_transform_parent);
+
+		// Detach the hand controller
+		this.dist_grab = null;
+
+		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		rigidbody.useGravity = true;
+		rigidbody.isKinematic = false;
+		if (handType == distanceGrab.HandType.LeftHand)
+		{
+			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
+		}
+		else
+		{
+			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+		}
 	}
 
 	public bool is_available() { return hand_controller == null; }
