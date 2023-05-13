@@ -140,8 +140,14 @@ public class Tutorial : MonoBehaviour
             if (go.name == support_name + "Support")
             {
                 canva.transform.position = go.transform.position + Vector3.up;
-                Debug.LogWarningFormat("position of the panel : {0}", canva.transform.position);
                 canva.transform.LookAt(GameObject.Find("OVRPlayerController").transform);
+                canva.transform.Rotate(0, 180, 0);
+            }
+            if ((support_name == "Prompt") && (go.name == "AxeSupport"))
+            {
+                canva.transform.position = go.transform.position + Vector3.up;
+                canva.transform.LookAt(GameObject.Find("OVRPlayerController").transform);
+                canva.transform.Rotate(0, 180, 0);
             }
         }
     }

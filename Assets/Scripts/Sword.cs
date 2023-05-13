@@ -36,7 +36,6 @@ public class Sword : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         projectiles = GameObject.FindGameObjectsWithTag("projectile");
-        Debug.LogWarning(projectiles.Length);
         sword_anchor = sword;
         for (int i = 0; i < projectiles.Length; i++)
         {

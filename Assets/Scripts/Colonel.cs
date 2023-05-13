@@ -46,7 +46,6 @@ public class Colonel : MonoBehaviour
 
     void InteractionManager(ObjectAnchor object_grasped)
     {
-        Debug.LogWarningFormat("tutorial stage : {0}", tutorial_stage);
         switch (object_grasped.name)
         {
             case ("Bow_"):

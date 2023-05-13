@@ -10,7 +10,9 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("target"))
         {
+            Debug.LogWarning("entered collision");
             GetComponent<Rigidbody>().isKinematic = true;
+            GameObject.Find("Bow_").GetComponent<Bow>().tutorial_completed = true;
         }
     }
 }
