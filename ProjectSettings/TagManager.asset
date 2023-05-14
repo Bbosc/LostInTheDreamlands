@@ -8,6 +8,7 @@ TagManager:
   - projectile
   - Container
   - Fruit
+  - Pink_cauldron
   layers:
   - Default
   - TransparentFX

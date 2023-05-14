@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2400122484666388036}
   - component: {fileID: 7968535631909754353}
   - component: {fileID: 6688632886329762065}
+  - component: {fileID: 5077714443264865109}
   m_Layer: 3
   m_Name: apple
   m_TagString: Fruit
@@ -156,3 +157,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graspingRadius: 0.1
   trackingSpace: {fileID: 0}
+--- !u!135 &5077714443264865109
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829371231341652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.007872384
+  m_Center: {x: 0.0000000020954758, y: -0.0000000032596283, z: 0}

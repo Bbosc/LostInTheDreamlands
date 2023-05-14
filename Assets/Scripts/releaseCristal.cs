@@ -21,9 +21,11 @@ public class releaseCristal : MonoBehaviour
     {
         int nbr_of_fruits_at_anchor = 0;
         for (int i = 0; i < fruits_in_the_scene.Length; ++i) {
-            if (Vector3.Distance(fruits_in_the_scene[i].transform.position, anchor_location.position) < 2) {
-                ++nbr_of_fruits_at_anchor;
-            };
+            if (!(fruits_in_the_scene[i].GetComponent<objectToMove>().objectInTheContainer)) {
+                if (Vector3.Distance(fruits_in_the_scene[i].transform.position, anchor_location.position) < 2) {
+                    ++nbr_of_fruits_at_anchor;
+                }
+            }
         }
 
         if (nbr_of_fruits_at_anchor > 4) {

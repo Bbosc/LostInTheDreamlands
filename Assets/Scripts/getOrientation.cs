@@ -15,7 +15,7 @@ public class getOrientation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.rotation = trackingSpace.rotation;
+        transform.rotation = trackingSpace.rotation;
         //trackingSpace.Rotate(90.0f, 0.0f, 0.0f);
         //transform.rotation = trackingSpace.rotation;
     }

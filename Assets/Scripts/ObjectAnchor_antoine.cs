@@ -54,9 +54,9 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 		rigidbody.useGravity = true;
 		rigidbody.isKinematic = false;
 		if ( handType == HandController_antoine.HandType.LeftHand ) {
-			rigidbody.velocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
+			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
 		} else {
-			rigidbody.velocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
 		}
 	}
 
@@ -73,11 +73,14 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 		Rigidbody rigidbody = GetComponent<Rigidbody>();
 		rigidbody.useGravity = true;
 		rigidbody.isKinematic = false;
+		Debug.Log("Trow object");
 		if ( handType == distanceGrab.HandType.LeftHand ) {
 			Debug.Log("Throwing");
 			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
+			rigidbody.velocity *= 10;
 		} else {
 			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+			rigidbody.velocity *= 10;
 		}
 	}
 
