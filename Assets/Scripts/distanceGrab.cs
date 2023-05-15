@@ -21,10 +21,10 @@ public class distanceGrab : MonoBehaviour
     public GameObject go;
 
     // Store all gameobjects containing an Anchor
-    static protected ObjectAnchor_antoine[] anchors_in_the_scene;
+    static protected ObjectAnchor[] anchors_in_the_scene;
 	void Start () {
 		// Prevent multiple fetch
-		if ( anchors_in_the_scene == null ) anchors_in_the_scene = GameObject.FindObjectsOfType<ObjectAnchor_antoine>();
+		if ( anchors_in_the_scene == null ) anchors_in_the_scene = FindObjectsOfType<ObjectAnchor>();
         state = graspingState.IDLE;
 
         //Set up the line renderer
@@ -77,15 +77,15 @@ public class distanceGrab : MonoBehaviour
         displayedRay.SetPosition(1, endLineRenderer);
     }
 
-    ObjectAnchor_antoine getObjectHit(Vector3 target, Vector3 direction) {
+    ObjectAnchor getObjectHit(Vector3 target, Vector3 direction) {
         RaycastHit hit;
         Ray ray = new Ray(target, direction);
 
         if (Physics.Raycast(ray, out hit)) {
             GameObject objectHit = hit.collider.gameObject;
 
-            if (objectHit.GetComponent<ObjectAnchor_antoine>()) {
-                return objectHit.GetComponent<ObjectAnchor_antoine>();
+            if (objectHit.GetComponent<ObjectAnchor>()) {
+                return objectHit.GetComponent<ObjectAnchor>();
             }
         }
         return null;
@@ -96,7 +96,7 @@ public class distanceGrab : MonoBehaviour
 
 	// Store the object atached to this hand
 	// N.B. This can be extended by using a list to attach several objects at the same time
-	protected ObjectAnchor_antoine object_grasped = null;
+	protected ObjectAnchor object_grasped = null;
 
 	/// <summary>
 	/// This method handles the linking of distant object anchors to this distance grabber
