@@ -9,11 +9,13 @@ TagManager:
   - Container
   - enemy
   - enemyboss
+  - Fruit
+  - Pink_cauldron
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Fruits
   - Water
   - UI
   - 

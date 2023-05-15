@@ -9,6 +9,9 @@ public class objectToMove : MonoBehaviour
     protected Transform initial_transform_parent;
     //public ParentConstraint parentConstraint;
     protected ParentConstraint parentConstraint;
+
+    Collider m_Collider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,7 @@ public class objectToMove : MonoBehaviour
         objectInTheContainer = false;
         parentConstraint = GetComponent<ParentConstraint>();
         initial_transform_parent = transform.parent;
+        m_Collider = GetComponent<Collider>();
         Debug.Log("Object created");
     }
 
@@ -27,6 +31,7 @@ public class objectToMove : MonoBehaviour
             parentConstraint.translationAtRest = Vector3.zero;
             parentConstraint.translationOffsets = new Vector3[] {Vector3.zero};
             parentConstraint.constraintActive = true;
+            m_Collider.enabled = false;
             
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             Debug.Log("Collision with container");
@@ -38,10 +43,11 @@ public class objectToMove : MonoBehaviour
     {
         if (objectInTheContainer) {
             //if (OVRInput.Get( OVRInput.RawButton.Y )) {
-            if (Vector3.Angle(transform.up, Vector3.down) < 45) {
+            if (Vector3.Angle(transform.forward, Vector3.down) < 80) {
                 // Set the object to be placed in the original transform parent
 		        //transform.SetParent( initial_transform_parent, true );
                 parentConstraint.constraintActive = false;
+                m_Collider.enabled = true;
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                 objectInTheContainer = false;
             }
