@@ -12,8 +12,6 @@ public class PanelManager : MonoBehaviour
     void Start()
     {
         canvas = this.gameObject.GetComponentInChildren<RectTransform>();
-        showPanel("Sword");
-        
     }
 
     // Update is called once per frame

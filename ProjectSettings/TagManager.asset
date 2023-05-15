@@ -4,13 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hammer
   - projectile
   - Container
   - enemy
   - enemyboss
   - Fruit
   - Pink_cauldron
+  - Sword
+  - target
+  - panel
+  - interactor
 
   layers:
   - Default
