@@ -59,3 +59,4 @@ public class Projectile : MonoBehaviour
     {
         Destroy(Instantiate(explosionPrefab, position, Quaternion.identity), 1f);
     }
+}

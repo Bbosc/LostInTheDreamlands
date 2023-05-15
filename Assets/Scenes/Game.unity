@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16146,7 +16146,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 355312524381552382, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
       propertyPath: m_Name
-      value: Sword
+      value: Sword_
       objectReference: {fileID: 0}
     - target: {fileID: 355312524381552382, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
       propertyPath: m_TagString
@@ -16240,6 +16240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7989010de94b3554196f12e049ffe77c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorial_completed: 0
 --- !u!114 &1435321755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16255,6 +16256,7 @@ MonoBehaviour:
   graspingRadius: 0.1
   heldObjRB: {fileID: 0}
   collisionBoxes: []
+  trackingSpace: {fileID: 0}
 --- !u!1 &1441821283 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1660603843503870, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
@@ -21238,7 +21240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3317823749142253822, guid: d4958227484245e4592c41ab2c02ad22, type: 3}
       propertyPath: m_Name
-      value: Bow
+      value: Bow_
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4958227484245e4592c41ab2c02ad22, type: 3}
@@ -21280,6 +21282,7 @@ MonoBehaviour:
   graspingRadius: 0.1
   heldObjRB: {fileID: 0}
   collisionBoxes: []
+  trackingSpace: {fileID: 0}
 --- !u!54 &1901097772
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21311,7 +21314,7 @@ MonoBehaviour:
   arrow: {fileID: 4865309214770636011, guid: 45804eb2722b83845adbcf2d72da12dd, type: 3}
   launchForce: 10
   shotPoint: {fileID: 813235040}
-  arrow_knocked: 0
+  tutorial_completed: 0
 --- !u!65 &1901097777
 BoxCollider:
   m_ObjectHideFlags: 0

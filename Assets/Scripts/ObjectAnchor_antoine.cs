@@ -73,7 +73,7 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 		this.dist_grab = null;
 
 		rigidbody.useGravity = true;
-		//rigidbody.isKinematic = false;
+		rigidbody.isKinematic = false;
 		Debug.Log("Trow object");
 		if ( handType == distanceGrab.HandType.LeftHand ) {
 			Debug.Log("Throwing");
