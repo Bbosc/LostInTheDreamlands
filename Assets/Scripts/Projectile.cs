@@ -32,8 +32,8 @@ public class Projectile : MonoBehaviour
             destroyProjectile();
         }
 
-        if (col.gameObject.tag == "enemyboss"){
-            col.gameObject.GetComponentInParent<EnemyBoss>().Dead = true;
+        if (collision.gameObject.tag == "enemyboss"){
+            collision.gameObject.GetComponentInParent<EnemyBoss>().Dead = true;
         }
     }
 
