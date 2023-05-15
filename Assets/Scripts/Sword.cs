@@ -10,6 +10,10 @@ public class Sword : MonoBehaviour
             col.rigidbody.AddForce(-col.GetContact(0).normal * force_multiplicator, ForceMode.Impulse);
             col.rigidbody.useGravity = true;
         }
+        if (col.gameObject.tag == "enemy")
+        {
+            col.gameObject.GetComponentInParent<Enemy>().Dead = true;
+        }
         else
         {
             this.gameObject.GetComponentsInChildren<Collider>();

@@ -42,4 +42,15 @@ public class Projectile : MonoBehaviour
         newProjectile.GetComponent<MeshRenderer>().material = projectileMaterial;
         newProjectile.AddComponent<Projectile>();
     }
+
+
+    private void OnCollisionEnter(Collision col){
+
+        Debug.Log("BALL COLLISION");
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "enemyboss"){
+            // GameObject.Find('Skeleton').GetComponentInChildren<Enemy>().Dead = true;
+            col.gameObject.GetComponentInParent<EnemyBoss>().Dead = true;
+        }
+    }
 }

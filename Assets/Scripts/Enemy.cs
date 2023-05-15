@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (anim.GetBool("IsDying") == false)
+        if (Dead != true)
         {
             float dist = Vector3.Distance(transform.position, target.transform.position);
 
@@ -60,11 +60,12 @@ public class Enemy : MonoBehaviour
     {
         anim.SetBool("IsWalking", false);
         agent.isStopped = true; 
-        anim.SetBool("IsDying", true);
+        
     }
 
     void Dying()
     {
         agent.isStopped = true; 
+        anim.SetBool("IsDying", true);
     }
 }

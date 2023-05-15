@@ -306,8 +306,6 @@ public class OVRPlayerController : MonoBehaviour
 			if (GravityModifier == 0){
 				FallSpeed = 0;
 			}
-		Debug.Log("Gravity");
-		Debug.Log(GravityModifier);
 		moveDirection.y += FallSpeed * SimulationRate * Time.deltaTime;
 
 

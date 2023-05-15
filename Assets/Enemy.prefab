@@ -171,10 +171,11 @@ GameObject:
   - component: {fileID: 9128410318843767041}
   - component: {fileID: 9128410318843767045}
   - component: {fileID: 9128410318843767047}
+  - component: {fileID: 6820782815199868733}
   - component: {fileID: 9128410318843767046}
   m_Layer: 0
   m_Name: LowPolySkeleton
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,6 +240,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!64 &6820782815199868733
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9128410318843767040}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!114 &9128410318843767046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a23becab8b6ef4c820b68e451fa199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dead: 0
 --- !u!1 &9128410319052590829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,7 +1051,7 @@ GameObject:
   - component: {fileID: 9128410320150345522}
   m_Layer: 0
   m_Name: LowPolySkeleton
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

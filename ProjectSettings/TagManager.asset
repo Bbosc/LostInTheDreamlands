@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Hammer
   - projectile
+  - Container
+  - enemy
+  - enemyboss
   layers:
   - Default
   - TransparentFX

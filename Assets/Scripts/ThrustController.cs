@@ -72,7 +72,7 @@ public class ThrustController : MonoBehaviour
             velocity = new Vector3(Mathf.Clamp(velocity.x, -maxVelocity, maxVelocity), 
                     Mathf.Clamp(velocity.y, -maxVelocity, maxVelocity), 
                     Mathf.Clamp(velocity.z, -maxVelocity, maxVelocity));
-            Debug.Log(velocity);
+
             character.Move(velocity * Time.deltaTime);
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
