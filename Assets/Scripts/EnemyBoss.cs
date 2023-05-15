@@ -16,7 +16,7 @@ public class EnemyBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player");
@@ -55,7 +55,8 @@ public class EnemyBoss : MonoBehaviour
 
     void Dying()
     {
-        anim.SetBool("IsDying", false);
+        anim.SetBool("IsWalking", false);
+        anim.SetBool("IsDying", true);
         agent.isStopped = true; 
     }
 
