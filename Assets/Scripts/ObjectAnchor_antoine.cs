@@ -5,10 +5,13 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 	[Header( "Grasping Properties" )]
 	public float graspingRadius = 0.1f;
 
+	Rigidbody rigidbody;
+
 	// Store initial transform parent
 	protected Transform initial_transform_parent;
 	void Start () {
 		initial_transform_parent = transform.parent;
+		rigidbody = GetComponent<Rigidbody>();
 	}
 
 
@@ -21,7 +24,7 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 	public void attach_to ( HandController_antoine hand_controller ) {
 		// Store the hand controller in memory
 		this.hand_controller = hand_controller;
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		
 		rigidbody.useGravity = false;
 		rigidbody.isKinematic = true;
 
@@ -32,7 +35,7 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 	public void attach_to_distance ( distanceGrab dist_grab ) {
 		// Store the hand controller in memory
 		this.dist_grab = dist_grab;
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
+
 		rigidbody.useGravity = false;
 		rigidbody.isKinematic = true;
 
@@ -50,9 +53,8 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 		// Detach the hand controller
 		this.hand_controller = null;
 
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
 		rigidbody.useGravity = true;
-		rigidbody.isKinematic = false;
+		//rigidbody.isKinematic = false;
 		if ( handType == HandController_antoine.HandType.LeftHand ) {
 			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
 		} else {
@@ -70,17 +72,16 @@ public class ObjectAnchor_antoine : MonoBehaviour {
 		// Detach the hand controller
 		this.dist_grab = null;
 
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
 		rigidbody.useGravity = true;
-		rigidbody.isKinematic = false;
+		//rigidbody.isKinematic = false;
 		Debug.Log("Trow object");
 		if ( handType == distanceGrab.HandType.LeftHand ) {
 			Debug.Log("Throwing");
 			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
-			rigidbody.velocity *= 10;
+			//rigidbody.velocity *= 10;
 		} else {
 			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
-			rigidbody.velocity *= 10;
+			//rigidbody.velocity *= 10;
 		}
 	}
 
