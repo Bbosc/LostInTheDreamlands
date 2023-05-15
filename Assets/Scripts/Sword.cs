@@ -4,6 +4,7 @@ public class Sword : MonoBehaviour
 {
     protected float force_multiplicator = 15.0f;
     GameObject[] projectiles;
+    GameObject[] enemies;
     ObjectAnchor sword_anchor;
     float dist = 0.0f;
     public bool tutorial_completed = false;
@@ -20,7 +21,7 @@ public class Sword : MonoBehaviour
             col.rigidbody.AddForce(-col.GetContact(0).normal * force_multiplicator, ForceMode.Impulse);
             col.rigidbody.useGravity = true;
         }
-        if (col.gameObject.tag == "enemy")
+        if (col.gameObject.CompareTag("enemy"))
         {
             col.gameObject.GetComponentInParent<Enemy>().Dead = true;
         }
@@ -30,7 +31,7 @@ public class Sword : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("projectile"))
+        if (collision.gameObject.CompareTag("projectile") || collision.gameObject.CompareTag("enemy"))
         {
             transform.position = sword_anchor.get_controller_position();
         }
@@ -40,6 +41,7 @@ public class Sword : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         projectiles = GameObject.FindGameObjectsWithTag("projectile");
+        enemies = GameObject.FindGameObjectsWithTag("enemy");
         sword_anchor = sword;
         for (int i = 0; i < projectiles.Length; i++)
         {
@@ -55,6 +57,23 @@ public class Sword : MonoBehaviour
             }
 
         }
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            dist = Vector3.Distance(sword.gameObject.transform.position, enemies[i].gameObject.transform.position);
+            if (dist < 0.8)
+            {
+                foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
+            }
+            else
+            {
+                foreach (Collider col in sword.collisionBoxes) { col.enabled = false; }
+                transform.position = sword_anchor.get_controller_position();
+            }
+
+        }
+
+
 
     }
 
