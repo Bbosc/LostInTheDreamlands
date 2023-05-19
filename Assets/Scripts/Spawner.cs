@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Spawner : MonoBehaviour
 {
     public GameObject enemy;
     public GameObject enemyboss;
     public GameObject ball;
+    public GameObject fragment;
+    public GameObject cauldron;
     GameObject target;
     public Vector3[] SpawnPos;
     private float StopDist = 1f;
@@ -17,11 +20,13 @@ public class Spawner : MonoBehaviour
     public bool SpawnBoss = false;
     public bool SpawnedBoss = false;
     public bool BossDead = false;
-
+    bool Fragment_Spawn = false;
+    ConstraintSource constraintSource;
     List<GameObject> list = new List<GameObject>();
     GameObject Boss;
     GameObject Ball;
     Vector3 PosBall = new Vector3(-85f, 8.8f, 62f);
+    GameObject Fragment;
     // Start is called before the first frame update
 
     void Start()
@@ -103,9 +108,19 @@ public class Spawner : MonoBehaviour
                 BossDead = true;
             }
 
-            if (BossDead == true)
+            if ((BossDead == true) & (Fragment_Spawn == false))
             {
                 Debug.Log("Victory");
+                Fragment_Spawn = true;
+                Fragment = (Instantiate(fragment, PosBall, new Quaternion(0, 0, 0, 0)));
+
+                
+                constraintSource.weight = 1;
+                constraintSource.sourceTransform = cauldron.transform;
+                Fragment.GetComponent<ParentConstraint>().AddSource(constraintSource);
+                // Fragment.GetComponent<ParentConstraint>();
+                // Fragment.GetComponent<Rigidbody>();
+                Destroy(Ball);
             }
         }
     }
