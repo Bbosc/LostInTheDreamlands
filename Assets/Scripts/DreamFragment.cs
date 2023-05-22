@@ -9,20 +9,20 @@ public class DreamFragment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.LogFormat("position of the fragment : {0}", gameObject.transform.position);
-        Debug.LogFormat("position of the cauldron : {0}", GameObject.Find("Cauldron_Tuto").gameObject.transform.position);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(gameObject.transform.position, GameObject.Find("Cauldron_Tuto").gameObject.transform.position) < snapDistance)
+        if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            Debug.LogFormat("position of the fragment : {0}", gameObject.transform.position);
-            Debug.LogFormat("position of the cauldron : {0}", GameObject.Find("Cauldron_Tuto").gameObject.transform.position);
-            gameObject.transform.position = GameObject.Find("Cauldron_Tuto").gameObject.transform.position + new Vector3(0,0.5f,0);
-            StartCoroutine(LoadSceneDelay(2));
+            Debug.LogFormat("player position temple : {0}", GameObject.Find("OVRPlayerController").transform.position);
+            if (Vector3.Distance(gameObject.transform.position, GameObject.Find("Cauldron_Tuto").gameObject.transform.position) < snapDistance)
+            {
+                gameObject.transform.position = GameObject.Find("Cauldron_Tuto").gameObject.transform.position + new Vector3(0, 0.5f, 0);
+                StartCoroutine(LoadSceneDelay(2));
+            }
         }
         
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
@@ -36,49 +37,52 @@ public class Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tutorial_stage = colonel.get_tutorial_state();
-        if (tutorial_stage != previous_stage)
+        if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            hidePanel();
-            activePanelIndex += 1;
-            showPanel();
-            pushed_previous_frame = true;
-            previous_stage = tutorial_stage;
-        }
-        if (activePanelIndex < 5)
-        {
-            if (OVRInput.Get(OVRInput.Button.One) && (!pushed_previous_frame))
+            tutorial_stage = colonel.get_tutorial_state();
+            if (tutorial_stage != previous_stage)
             {
                 hidePanel();
                 activePanelIndex += 1;
                 showPanel();
                 pushed_previous_frame = true;
+                previous_stage = tutorial_stage;
             }
-            if (OVRInput.Get(OVRInput.Button.Two) && (!pushed_previous_frame))
+            if (activePanelIndex < 5)
             {
-                hidePanel();
-                activePanelIndex -= 1;
-                showPanel();
-                pushed_previous_frame = true;
+                if (OVRInput.Get(OVRInput.Button.One) && (!pushed_previous_frame))
+                {
+                    hidePanel();
+                    activePanelIndex += 1;
+                    showPanel();
+                    pushed_previous_frame = true;
+                }
+                if (OVRInput.Get(OVRInput.Button.Two) && (!pushed_previous_frame))
+                {
+                    hidePanel();
+                    activePanelIndex -= 1;
+                    showPanel();
+                    pushed_previous_frame = true;
+                }
+                if (!OVRInput.Get(OVRInput.Button.Two) && !OVRInput.Get(OVRInput.Button.One)) pushed_previous_frame = false;
             }
-            if (!OVRInput.Get(OVRInput.Button.Two) && !OVRInput.Get(OVRInput.Button.One)) pushed_previous_frame = false;
+
+
+
+
+            //if (Input.GetKeyDown("a"))
+            //{
+            //    hidePanel();
+            //    activePanelIndex += 1;
+            //    showPanel();
+            //}
+            //if (Input.GetKeyDown("b"))
+            //{
+            //    hidePanel();
+            //    activePanelIndex -= 1;
+            //    showPanel();
+            //}
         }
-
-        
-
-
-        //if (Input.GetKeyDown("a"))
-        //{
-        //    hidePanel();
-        //    activePanelIndex += 1;
-        //    showPanel();
-        //}
-        //if (Input.GetKeyDown("b"))
-        //{
-        //    hidePanel();
-        //    activePanelIndex -= 1;
-        //    showPanel();
-        //}
     }
 
     void showPanel()
