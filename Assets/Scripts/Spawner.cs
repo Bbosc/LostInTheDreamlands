@@ -21,12 +21,8 @@ public class Spawner : MonoBehaviour
     List<GameObject> list = new List<GameObject>();
     GameObject Boss;
     GameObject Ball;
-<<<<<<< Updated upstream
-    Vector3 PosBall = new Vector3(-85f, 8.8f, 62f);
-=======
     Vector3 PosBall;
     GameObject Fragment;
->>>>>>> Stashed changes
     // Start is called before the first frame update
 
     void Start()
