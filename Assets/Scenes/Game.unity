@@ -8691,6 +8691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor_location: {fileID: 116650164}
+  cauldron: {fileID: 0}
+  fragment: {fileID: 0}
 --- !u!65 &604888912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15826,6 +15828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor_location: {fileID: 116650164}
+  cauldron: {fileID: 0}
+  fragment: {fileID: 0}
 --- !u!65 &1264777124
 BoxCollider:
   m_ObjectHideFlags: 0
