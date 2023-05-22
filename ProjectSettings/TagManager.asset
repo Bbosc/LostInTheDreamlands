@@ -3,23 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - projectile
-  - Container
-  - enemy
-  - enemyboss
-  - Fruit
-  - Pink_cauldron
-  - Sword
-  - target
-  - panel
-  - interactor
-
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Fruits
+  - 
   - Water
   - UI
   - 

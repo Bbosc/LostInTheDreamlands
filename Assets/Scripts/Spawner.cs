@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     public GameObject ball;
     GameObject target;
     public Vector3[] SpawnPos;
-    private float StopDist = 1f;
+    private float StopDist = 10f;
 
     public bool Spawnable = false;
     public bool Spawned = false;
@@ -21,7 +21,12 @@ public class Spawner : MonoBehaviour
     List<GameObject> list = new List<GameObject>();
     GameObject Boss;
     GameObject Ball;
+<<<<<<< Updated upstream
     Vector3 PosBall = new Vector3(-85f, 8.8f, 62f);
+=======
+    Vector3 PosBall;
+    GameObject Fragment;
+>>>>>>> Stashed changes
     // Start is called before the first frame update
 
     void Start()
@@ -33,12 +38,12 @@ public class Spawner : MonoBehaviour
         // }
 
         SpawnPos = new Vector3[4];
-
-        SpawnPos[0] = new Vector3(-125f, -52f, 135f);
-        SpawnPos[1] = new Vector3(-116, -52f, 121f);
-        SpawnPos[2] = new Vector3(-130, -52f, 100f);
-        SpawnPos[3] = new Vector3(-145, -52f, 107f);
-        PosBall = new Vector3(-85f, 8.8f, 62f);
+        Vector3 position = new Vector3(-140f, -45f, 140f);
+        SpawnPos[0] = new Vector3(-10f, 1f, -10f) + position;
+        SpawnPos[1] = new Vector3(-10f, 1f, 10f) + position;
+        SpawnPos[2] = new Vector3(10f, 1f, -10f) + position;
+        SpawnPos[3] = new Vector3(10f, 1f, 10f) + position;
+        PosBall = transform.position;
     }
 
     // Update is called once per frame
@@ -131,6 +136,12 @@ public class Spawner : MonoBehaviour
         // Debug.Log(Boss.transform.GetChild(0).transform.position);
         
         if (distplayer > 20f) 
+        {
+            Destroy(Ball);
+            Ball = (Instantiate(ball, PosBall, new Quaternion(0, 0, 0, 0)));
+        }
+
+        if (Ball.GetComponentInChildren<Projectile>().HitRock == true)
         {
             Destroy(Ball);
             Ball = (Instantiate(ball, PosBall, new Quaternion(0, 0, 0, 0)));

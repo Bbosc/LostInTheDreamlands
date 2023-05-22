@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 {
     Animator anim;
     GameObject player;
-    private float StopDist = 1.7f;
+    // private float StopDist = 1.7f;
     
     // Start is called before the first frame update
     void Start()
@@ -19,12 +19,12 @@ public class Door : MonoBehaviour
     void Update()
     {
 
-        float dist = Vector3.Distance(transform.position, player.transform.position);
+        // float dist = Vector3.Distance(transform.position, player.transform.position);
 
-        if (dist < StopDist)
-        {
-            anim.SetBool("Opening", true);
-        }
+        // if (dist < StopDist)
+        // {
+        //     anim.SetBool("Opening", true);
+        // }
 
 
     }

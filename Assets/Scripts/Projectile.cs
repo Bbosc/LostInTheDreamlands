@@ -8,9 +8,11 @@ public class Projectile : MonoBehaviour
     Vector3 spawnPosition;
     public Material projectileMaterial;
     public GameObject explosionPrefab;
+    public bool HitRock;
 
     void Start()
     {
+        HitRock = false;
         spawnPosition = this.transform.position;
     }
 
@@ -34,6 +36,10 @@ public class Projectile : MonoBehaviour
 
         if (collision.gameObject.tag == "enemyboss"){
             collision.gameObject.GetComponentInParent<EnemyBoss>().Dead = true;
+            explode(collision.GetContact(0).point);
+        }
+        if (collision.gameObject.tag == "rock"){
+            HitRock = true;
         }
     }
 
