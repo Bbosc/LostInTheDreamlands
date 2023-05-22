@@ -67,25 +67,26 @@ public class Tutorial : MonoBehaviour
         
 
 
-        if (Input.GetKeyDown("a"))
-        {
-            hidePanel();
-            activePanelIndex += 1;
-            showPanel();
-        }
-        if (Input.GetKeyDown("b"))
-        {
-            hidePanel();
-            activePanelIndex -= 1;
-            showPanel();
-        }
+        //if (Input.GetKeyDown("a"))
+        //{
+        //    hidePanel();
+        //    activePanelIndex += 1;
+        //    showPanel();
+        //}
+        //if (Input.GetKeyDown("b"))
+        //{
+        //    hidePanel();
+        //    activePanelIndex -= 1;
+        //    showPanel();
+        //}
     }
 
     void showPanel()
     {
         if (activePanelIndex > 0) set_panel_position(panels[activePanelIndex-1].name);
         panels[activePanelIndex].SetActive(true);
-        panels[activePanelIndex].GetComponentInChildren<Button>().onClick.AddListener(hidePanel);
+        if (activePanelIndex < 5)
+            panels[activePanelIndex].GetComponentInChildren<Button>().onClick.AddListener(hidePanel);
         activateSupport(panels[activePanelIndex].name, true);
     }
 

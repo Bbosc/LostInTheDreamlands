@@ -12,7 +12,7 @@ public class objectToMove : MonoBehaviour
     //public ParentConstraint parentConstraint;
     //protected ParentConstraint parentConstraint;
 
-    Collider m_Collider;
+    //Collider m_Collider;
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class objectToMove : MonoBehaviour
         //parentConstraint = GetComponent<ParentConstraint>();
         initial_transform_parent = transform.parent;
         rb = GetComponent<Rigidbody>();
-        m_Collider = GetComponent<Collider>();
+        //m_Collider = GetComponent<Collider>();
         Debug.Log("Object created");
     }
 
@@ -35,13 +35,7 @@ public class objectToMove : MonoBehaviour
             //parentConstraint.translationAtRest = Vector3.zero;
             //parentConstraint.translationOffsets = new Vector3[] {Vector3.zero};
             //parentConstraint.constraintActive = true;
-
-
-
-            m_Collider.enabled = false;
-
-
-
+            //m_Collider.enabled = false;
 
             transform.SetParent(containerTransform);
             
@@ -65,10 +59,6 @@ public class objectToMove : MonoBehaviour
                 rb.isKinematic = false;
                 rb.useGravity = true;
                 objectInTheContainer = false;
-
-
-
-                m_Collider.enabled = true;
             }
             //meshWater.enabled = true;
         } 
