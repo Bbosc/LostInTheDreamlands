@@ -29,7 +29,7 @@ public class HandController : MonoBehaviour
         if (hand_closed && (object_grasped == null)) HandleGrabbing(anchors_in_the_scene);
         if (!hand_closed && (object_grasped != null))
         {
-            object_grasped.detach_from(this);
+            object_grasped.detach_from(this, handType);
             object_grasped = null;
         }
 

@@ -37,7 +37,7 @@ public class ObjectAnchor : MonoBehaviour
 		if (heldObjRB.gameObject.name == "Axe") tutorial_completed = true;
 	}
 
-	public void detach_from(HandController hand_controller)
+	public void detach_from(HandController hand_controller, HandController.HandType handType)
 	{
 		if (this.hand_controller != hand_controller) return;
 
@@ -47,6 +47,16 @@ public class ObjectAnchor : MonoBehaviour
 		heldObjRB.useGravity = true;
 		heldObjRB.constraints = RigidbodyConstraints.None;
 		heldObjRB.drag = 1;
+
+		heldObjRB.isKinematic = false;
+		if (handType == HandController.HandType.LeftHand)
+		{
+			heldObjRB.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
+		}
+		else
+		{
+			heldObjRB.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+		}
 
 		foreach (Collider v in collisionBoxes) { v.enabled = true; }
 	}
