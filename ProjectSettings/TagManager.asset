@@ -15,6 +15,9 @@ TagManager:
   - panel
   - interactor
   - Purple_cauldron
+  - arrow
+  - rock
+  - bottomWell
   layers:
   - Default
   - TransparentFX
