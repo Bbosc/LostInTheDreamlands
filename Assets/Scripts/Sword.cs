@@ -64,9 +64,9 @@ public class Sword : MonoBehaviour
         }
 
 
-        for (int i = 0; i < ennemies.Length; i++)
+        for (int i = 0; i < enemies.Length; i++)
         {
-            dist = Vector3.Distance(sword.gameObject.transform.position, ennemies[i].gameObject.transform.position);
+            dist = Vector3.Distance(sword.gameObject.transform.position, enemies[i].gameObject.transform.position);
             if (dist < 2)
             {
                 activate = true;
@@ -82,23 +82,6 @@ public class Sword : MonoBehaviour
             }
 
         }
-
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            dist = Vector3.Distance(sword.gameObject.transform.position, enemies[i].gameObject.transform.position);
-            if (dist < 0.8)
-            {
-                foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
-            }
-            else
-            {
-                foreach (Collider col in sword.collisionBoxes) { col.enabled = false; }
-                transform.position = sword_anchor.get_controller_position();
-            }
-
-        }
-
-
 
     }
 
