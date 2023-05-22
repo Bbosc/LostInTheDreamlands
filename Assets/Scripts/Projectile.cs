@@ -37,6 +37,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag == "enemyboss"){
             collision.gameObject.GetComponentInParent<EnemyBoss>().Dead = true;
             explode(collision.GetContact(0).point);
+            // explode(GameObject.Find("Sword_").GetComponent<Sword>().transform.position);
         }
         if (collision.gameObject.tag == "rock"){
             HitRock = true;

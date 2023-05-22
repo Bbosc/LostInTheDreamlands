@@ -9,11 +9,6 @@ public class releaseCristal : MonoBehaviour
     static protected GameObject[] fruits_in_the_scene;
     public Transform anchor_location;
     private Rigidbody rb;
-    public GameObject cauldron;
-    public GameObject fragment;
-
-    ConstraintSource constraintSource;
-    GameObject Fragment;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +30,14 @@ public class releaseCristal : MonoBehaviour
         }
 
         if (nbr_of_fruits_at_anchor > 4) {
-            //rb.useGravity = true;
-            Fragment = (Instantiate(fragment, anchor_location.position, new Quaternion(0, 0, 0, 0)));
+            rb.useGravity = true;
+            MeshRenderer[] cristalsMesh = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer cristal in cristalsMesh) {
+                cristal.enabled = true;
+            }
 
-                
-            constraintSource.weight = 1;
-            constraintSource.sourceTransform = cauldron.transform;
-            Fragment.GetComponent<ParentConstraint>().AddSource(constraintSource);
+            Light light = GetComponentInChildren<Light>();
+            light.enabled = true;
         }
     }
 }

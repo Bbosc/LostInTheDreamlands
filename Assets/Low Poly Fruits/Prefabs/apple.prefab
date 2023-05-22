@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 23363714592162624}
   - component: {fileID: 4091770886510771549}
   - component: {fileID: 2400122484666388036}
-  - component: {fileID: 7968535631909754353}
-  - component: {fileID: 6688632886329762065}
+  - component: {fileID: 3002998920845510716}
   - component: {fileID: 5077714443264865109}
   m_Layer: 3
   m_Name: apple
@@ -99,7 +98,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -117,33 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectInTheContainer: 0
---- !u!1773428102 &7968535631909754353
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829371231341652}
-  m_Enabled: 1
-  m_Weight: 1
-  m_TranslationAtRest: {x: -113.5776, y: 53.512, z: -39.463}
-  m_RotationAtRest: {x: -89.98, y: 0, z: 0}
-  m_TranslationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_RotationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 0
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
---- !u!114 &6688632886329762065
+  containerTransform: {fileID: 0}
+--- !u!114 &3002998920845510716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,10 +126,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1829371231341652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973db9ab6ffbd5842896420ac775a392, type: 3}
+  m_Script: {fileID: 11500000, guid: 34b13502043ee584f95ad41b76f06268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   graspingRadius: 0.1
+  heldObjRB: {fileID: 0}
+  collisionBoxes: []
   trackingSpace: {fileID: 0}
 --- !u!135 &5077714443264865109
 SphereCollider:
