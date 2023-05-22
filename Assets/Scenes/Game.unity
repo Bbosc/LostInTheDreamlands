@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2659,7 +2659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e091c9fdf8e946b2836d8f782c6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Pink_cauldron
+  tag_: 
 --- !u!1773428102 &122947330
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -5335,7 +5335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e091c9fdf8e946b2836d8f782c6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Pink_cauldron
+  tag_: 
 --- !u!54 &315241761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6542,7 +6542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e091c9fdf8e946b2836d8f782c6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Pink_cauldron
+  tag_: 
 --- !u!1001 &376841438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10940,7 +10940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e091c9fdf8e946b2836d8f782c6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Pink_cauldron
+  tag_: 
 --- !u!114 &698600392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25051,7 +25051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e091c9fdf8e946b2836d8f782c6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Pink_cauldron
+  tag_: 
 --- !u!114 &1848954429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26719,15 +26719,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -108.7
+      value: -75.8
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 57.5
+      value: 55.9
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.3
+      value: -32.4
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalRotation.w
