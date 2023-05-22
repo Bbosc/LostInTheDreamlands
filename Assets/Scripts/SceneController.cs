@@ -18,6 +18,6 @@ public class SceneController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("Scenes/Game");
+        //SceneManager.LoadScene("Scenes/Game");
     }
 }

@@ -8,7 +8,7 @@ public class goToCauldron : MonoBehaviour
     protected Transform initial_transform_parent;
     //public ParentConstraint parentConstraint;
     protected ParentConstraint parentConstraint;
-    public string tag;
+    public string tag_;
 
     Collider m_Collider;
 
@@ -21,7 +21,7 @@ public class goToCauldron : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider container) {
-        if(container.gameObject.transform.tag == tag) {
+        if(container.gameObject.transform.tag == tag_) {
             parentConstraint.translationAtRest = Vector3.zero;
             parentConstraint.translationOffsets = new Vector3[] {new Vector3(0.0f,0.5f,0.0f)};
             parentConstraint.constraintActive = true;
