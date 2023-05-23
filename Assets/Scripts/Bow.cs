@@ -28,7 +28,7 @@ public class Bow : MonoBehaviour
             arrow_knocked = true;
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
         }
-        if (Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)) > 0.4f && arrow_knocked)
+        if ((Mathf.Abs(Vector3.Distance(handLeftPosition, handRightPosition)) > 0.3f) && arrow_knocked)
         {
             Shoot();
             arrow_knocked = false;
@@ -43,8 +43,8 @@ public class Bow : MonoBehaviour
         newArrow.GetComponent<Rigidbody>().isKinematic = false;
         newArrow.GetComponent<Rigidbody>().useGravity = true;
         newArrow.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        newArrow.GetComponent<Rigidbody>().transform.Rotate(90, 0, 0, Space.Self);
-        newArrow.GetComponent<Rigidbody>().velocity = (-transform.right) * launchForce;
+        newArrow.GetComponent<Rigidbody>().transform.Rotate(-90, 0, 0, Space.Self);
+        newArrow.GetComponent<Rigidbody>().velocity = (transform.right) * launchForce;
         newArrow.GetComponent<MeshCollider>().convex = true;
         newArrow.AddComponent<BoxCollider>();
         newArrow.AddComponent<Arrow>();
