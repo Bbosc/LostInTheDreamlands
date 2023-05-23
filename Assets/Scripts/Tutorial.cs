@@ -131,6 +131,7 @@ public class Tutorial : MonoBehaviour
                         go.SetActive(value);
                         break;
                     }
+
                 }
                 break;
             case ("DistanceGrab"):
@@ -151,6 +152,7 @@ public class Tutorial : MonoBehaviour
                         go.SetActive(value);
                         break;
                     }
+
                 }
                 break;
             default:

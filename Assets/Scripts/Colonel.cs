@@ -20,7 +20,6 @@ public class Colonel : MonoBehaviour
     Sword sword;
     List<bool> tutorials_passed = new List<bool>();
     int tutorial_stage = 0;
-    string previous_active_scene_name;
     bool reloaded = false;
 
     protected CharacterController character_controller;
@@ -28,12 +27,10 @@ public class Colonel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("starting new scneeeeeene");
         bow = GameObject.Find("Bow_").GetComponent<Bow>();
         sword = GameObject.Find("Sword_").GetComponent<Sword>();
         leftHand = GameObject.Find("LeftControllerAnchor").GetComponent<HandController>();
         rightHand = GameObject.Find("RightControllerAnchor").GetComponent<HandController>();
-        previous_active_scene_name = SceneManager.GetActiveScene().name;
         if (anchors_in_the_scene == null) anchors_in_the_scene = FindObjectsOfType<ObjectAnchor>();
         List<Vector3> listOfSpawnPositions = new List<Vector3>();
         foreach (ObjectAnchor oa in anchors_in_the_scene) { listOfSpawnPositions.Add(oa.gameObject.transform.position); }
@@ -72,7 +69,6 @@ public class Colonel : MonoBehaviour
                 if (Vector3.Distance(GameObject.Find("Fragment_Tuto").gameObject.transform.position, GameObject.Find("Cauldron_Tuto").gameObject.transform.position) < 1.5f)
                 {
                     GameObject.Find("Fragment_Tuto").gameObject.transform.position = GameObject.Find("Cauldron_Tuto").gameObject.transform.position + new Vector3(0, 0.5f, 0);
-                    //StartCoroutine(LoadSceneDelay(2));
                     SceneManager.LoadScene("Scenes/Game");
                     anchors_in_the_scene = null;
                     anchors_spawn_position = null;
@@ -82,12 +78,10 @@ public class Colonel : MonoBehaviour
         {
             if (!reloaded)
             {
-                Start();
+                Start(); // if the scene has been changed but has not reloaded its attributes yet
                 reloaded = true;
             }
         }
-
-        previous_active_scene_name = SceneManager.GetActiveScene().name;
         manageRespawn(-20);
     }
 
@@ -111,17 +105,15 @@ public class Colonel : MonoBehaviour
 
     void manageRespawn(float altitudeThreshold)
     {
-        //for (int i = 0; i < anchors_in_the_scene.Length; i++)
-        //{
-        //    if (anchors_in_the_scene[i].gameObject.transform.position.y < altitudeThreshold)
-        //    {
-        //        anchors_in_the_scene[i].gameObject.transform.position = anchors_spawn_position[i];
-        //        anchors_in_the_scene[i].gameObject.GetComponent<Rigidbody>().useGravity = false;
-        //    }
-        //}
-        Debug.Log("hello there");
-        Debug.LogFormat("player height : {0}", GameObject.Find("OVRPlayerController").transform.position.y);
-        Debug.LogFormat("diff cam play : {0}", Vector3.Distance(GameObject.Find("OVRCameraRig").transform.position, GameObject.Find("OVRPlayerController").transform.position));
+        for (int i = 0; i < anchors_in_the_scene.Length; i++)
+        {
+            if (anchors_in_the_scene[i].gameObject.transform.position.y < altitudeThreshold)
+            {
+                anchors_in_the_scene[i].gameObject.transform.position = anchors_spawn_position[i];
+                anchors_in_the_scene[i].gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            }
+        }
+       
         if (GameObject.Find("OVRPlayerController").transform.position.y < altitudeThreshold)
         {
             if (SceneManager.GetActiveScene().name == "Game")
@@ -133,12 +125,6 @@ public class Colonel : MonoBehaviour
                 character_controller.Move(new Vector3(0, 1.5f, 0) - transform.position);
             }
         }
-    }
-
-    IEnumerator LoadSceneDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("Scenes/Game");
     }
 
     public int get_tutorial_state() { return tutorial_stage; }
