@@ -9,7 +9,6 @@ public class EnemyBoss : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
     GameObject target;
-
     private float StopDist = 1.7f;
     public bool Dead = false;
 
@@ -57,7 +56,7 @@ public class EnemyBoss : MonoBehaviour
     {
         anim.SetBool("IsWalking", false);
         anim.SetBool("IsDying", true);
-        agent.isStopped = true; 
+        agent.isStopped = true;
     }
 
     // private void OnCollisionEnter(Collision col){

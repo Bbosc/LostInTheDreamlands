@@ -95,6 +95,7 @@ public class Spawner : MonoBehaviour
            
 
             Boss = (Instantiate(enemyboss, Pos, new Quaternion(0, 0, 0, 0)));
+            Boss.tag = "enemyboss";
             Ball = (Instantiate(ball, PosBall, new Quaternion(0, 0, 0, 0)));
         }
 

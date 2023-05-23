@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     {
         HitRock = false;
         spawnPosition = this.transform.position;
+        Debug.LogFormat("projetcile explosion prefab : {0}", explosionPrefab);
     }
 
     private void Update()
@@ -34,7 +35,7 @@ public class Projectile : MonoBehaviour
             destroyProjectile();
         }
 
-        if (collision.gameObject.tag == "enemyboss"){
+        if (collision.gameObject.CompareTag("enemyboss")){
             collision.gameObject.GetComponentInParent<EnemyBoss>().Dead = true;
             explode(collision.GetContact(0).point);
             // explode(GameObject.Find("Sword_").GetComponent<Sword>().transform.position);
