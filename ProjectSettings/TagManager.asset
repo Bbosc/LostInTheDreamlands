@@ -18,6 +18,8 @@ TagManager:
   - arrow
   - rock
   - fragment
+  - Potion
+  - Flower
   layers:
   - Default
   - TransparentFX
