@@ -14,11 +14,12 @@ public class Projectile : MonoBehaviour
     {
         HitRock = false;
         spawnPosition = this.transform.position;
-        Debug.LogFormat("projetcile explosion prefab : {0}", explosionPrefab);
     }
 
     private void Update()
     {
+        // We consider that any projectile 50 meters away from its spawn posiion is unusable
+        // since it most likely fell. So we destroy it
         if (Vector3.Distance(this.transform.position, spawnPosition) > 50)
         {
             destroyProjectile();
@@ -28,30 +29,24 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // In the tutorial : make projectile explode if enters in contact with an object tagged "target"
         if (collision.gameObject.CompareTag("target"))
         {
             explode(collision.GetContact(0).point);
-            GameObject.Find("Sword_").GetComponent<Sword>().tutorial_completed = true;
-            destroyProjectile();
+            GameObject.Find("Sword_").GetComponent<Sword>().tutorial_completed = true; // marked this part of the tuto done
+            destroyProjectile(); // destroy the projectile to complete explosion
         }
-
+        // if object hits the boss skeleton, marked it as dead and make an explosion
         if (collision.gameObject.CompareTag("enemyboss")){
             collision.gameObject.GetComponentInParent<EnemyBoss>().Dead = true;
             explode(collision.GetContact(0).point);
-            // explode(GameObject.Find("Sword_").GetComponent<Sword>().transform.position);
         }
         if (collision.gameObject.tag == "rock"){
             HitRock = true;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-       if (collision.gameObject.CompareTag("target"))
-        {
-        }
-    }
-
+    // we do not want to have unused projectile on the map, so we destroy them when needed
     public void destroyProjectile()
     {
         for (var i = gameObject.transform.childCount - 1; i >= 0; i--)
@@ -62,7 +57,7 @@ public class Projectile : MonoBehaviour
         
     }
 
-
+    // this function instantiate an explosiion prefab at the position given in argument
     void explode(Vector3 position)
     {
         Destroy(Instantiate(explosionPrefab, position, Quaternion.identity), 1f);

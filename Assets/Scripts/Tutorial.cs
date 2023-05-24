@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
+    // This script should manage the events related to the tutorial, such as the canvas containing the explanations
+    // and the activation of the corresponding activity, depending on what the player has achieved so far
     Transform canva = null;
     string[] panelNames = {"Introduction", "Introduction (1)", "Introduction (2)", "Introduction (3)", "Grabbing",
                                 "Prompt", "Sword", "Bow", "DistanceGrab", "Jetpack"};
@@ -39,6 +41,9 @@ public class Tutorial : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
+            // get the tutorial stage from the colonel instance
+            // hide previous panel and skip to the next one if a new stage of the tutorial
+            // has been completed
             tutorial_stage = colonel.get_tutorial_state();
             if (tutorial_stage != previous_stage)
             {
@@ -48,6 +53,7 @@ public class Tutorial : MonoBehaviour
                 pushed_previous_frame = true;
                 previous_stage = tutorial_stage;
             }
+            // If it's still the introduction, use A and B to navigate the informations panels
             if (activePanelIndex < 5)
             {
                 if (OVRInput.Get(OVRInput.Button.One) && (!pushed_previous_frame))
@@ -66,25 +72,10 @@ public class Tutorial : MonoBehaviour
                 }
                 if (!OVRInput.Get(OVRInput.Button.Two) && !OVRInput.Get(OVRInput.Button.One)) pushed_previous_frame = false;
             }
-
-
-
-
-            //if (Input.GetKeyDown("a"))
-            //{
-            //    hidePanel();
-            //    activePanelIndex += 1;
-            //    showPanel();
-            //}
-            //if (Input.GetKeyDown("b"))
-            //{
-            //    hidePanel();
-            //    activePanelIndex -= 1;
-            //    showPanel();
-            //}
         }
     }
 
+    // the panels already exist, so we only have to hide or show them depending on the tutorial stage
     void showPanel()
     {
         if (activePanelIndex > 0) set_panel_position(panels[activePanelIndex-1].name);
@@ -100,6 +91,7 @@ public class Tutorial : MonoBehaviour
         activateSupport(panels[activePanelIndex].name, false);
     }
 
+    // Depending on the panel name, set the corresponding stand active or inactive
     void activateSupport(string name, bool value)
     {
         switch (name)
@@ -160,6 +152,9 @@ public class Tutorial : MonoBehaviour
         }
     }
 
+    // To make sure the player sees them, the panels position of the (n + 1)-th interaction shows at the n-th stand
+    // we also want it to be slightly off the support's position to avoid having the panel onto the player
+    // we make the panel looks at the player by using LookAt, since it's more user-friendly
     void set_panel_position(string support_name)
     {
         foreach (GameObject go in interactors)

@@ -14,13 +14,17 @@ public class Sword : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
 
+    // We need the Collision object instead of the collider for its contatct points attributes
+    // It makes it way easier to manage the trajectory of the propulsed object
     private void OnCollisionEnter(Collision col)
     {
+        // if sword encountered a black sphere, then propulse it squarely w.r.t the contact surface
         if (col.gameObject.CompareTag("projectile"))
         {
             col.rigidbody.AddForce(-col.GetContact(0).normal * force_multiplicator, ForceMode.Impulse);
             col.rigidbody.useGravity = true;
         }
+        // if sword encountered a skeleton
         if (col.gameObject.CompareTag("enemy"))
         {
             col.gameObject.GetComponentInParent<Enemy>().Dead = true;
@@ -31,6 +35,8 @@ public class Sword : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        // when the collision ended, make sure to snap back the sword position into the controller
+        // otherwise there can be some shift in the sword's position
         if (collision.gameObject.CompareTag("projectile") || collision.gameObject.CompareTag("enemy"))
         {
             transform.position = sword_anchor.get_controller_position();
@@ -40,14 +46,26 @@ public class Sword : MonoBehaviour
     public void GrabSword(ObjectAnchor sword)
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true;
+        // Update the list of available projectiles and ennemies
         projectiles = GameObject.FindGameObjectsWithTag("projectile");
         enemies = GameObject.FindGameObjectsWithTag("enemy");
-        sword_anchor = sword;
+        sword_anchor = sword; // update the default sword position when in hand
         bool activate = false;
-        for (int i = 0; i < projectiles.Length; i++)
+        // activate/desactivate colliders if the sword is close/far enough from the ennemies or the projectiles
+        activateSwordColliders(sword, projectiles, 0.8f, activate);
+        activateSwordColliders(sword, enemies, 2.0f, activate);
+
+        
+    }
+
+    // We activate the sword colliders only when the sword is close to an object it can interact with,
+    // otherwise it could collide with an unwanted object, e.g. a tree, and provoke a shift in the sword's position
+    void activateSwordColliders(ObjectAnchor sword, GameObject[] interactables, float activatingDistance, bool activate)
+    {
+        for (int i = 0; i < interactables.Length; i++)
         {
-            dist = Vector3.Distance(sword.gameObject.transform.position, projectiles[i].gameObject.transform.position);
-            if (dist < 0.8)
+            dist = Vector3.Distance(sword.gameObject.transform.position, interactables[i].gameObject.transform.position);
+            if (dist < activatingDistance)
             {
                 foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
                 activate = true;
@@ -62,27 +80,6 @@ public class Sword : MonoBehaviour
 
             }
         }
-
-
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            dist = Vector3.Distance(sword.gameObject.transform.position, enemies[i].gameObject.transform.position);
-            if (dist < 2)
-            {
-                activate = true;
-                foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
-            }
-            else
-            {
-                if (activate == false)
-                {
-                    foreach (Collider col in sword.collisionBoxes) { col.enabled = false; }
-                    transform.position = sword_anchor.get_controller_position();
-                }
-            }
-
-        }
-
     }
 
     public bool is_tutorial_completed() { return tutorial_completed; }
