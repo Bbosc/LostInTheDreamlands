@@ -52,6 +52,7 @@ public class Sword : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("enemy");
         sword_anchor = sword; // update the default sword position when in hand
         transform.position = sword_anchor.get_controller_position();
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
         bool activate = false;
 
         for (int i = 0; i < projectiles.Length; i++)

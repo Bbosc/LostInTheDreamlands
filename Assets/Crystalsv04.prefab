@@ -903,8 +903,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5772551, y: 2.0849552, z: 1.7256101}
+  m_Center: {x: 0.07775494, y: 0.81606454, z: 0.2862197}
 --- !u!114 &6558181048723593309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b13502043ee584f95ad41b76f06268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graspingRadius: 5
+  graspingRadius: 0.5
   heldObjRB: {fileID: 0}
   collisionBoxes: []
   trackingSpace: {fileID: 0}

@@ -30,6 +30,7 @@ public class ObjectAnchor : MonoBehaviour
 		transform.SetParent(hand_controller.transform);
 		heldObjRB.transform.parent = hand_controller.transform;
 		heldObjRB.useGravity = false;
+		heldObjRB.isKinematic = true;
 		//heldObjRB.drag = 10;
 		heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
 
