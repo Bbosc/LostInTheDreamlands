@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 public class Target : MonoBehaviour
 {
     public GameObject door;
+    public GameObject target_main;
     public GameObject explosionPrefab;
     // public GameObject Fragment;d
     // public GameObject cauldron;
@@ -31,9 +32,10 @@ public class Target : MonoBehaviour
        if (collision.gameObject.CompareTag("arrow"))
         {
             anim_target.SetTrigger("Hit_target");
-            Debug.Log("Touched");
-            anim_door.SetBool("Open", true);
             Destroy(Instantiate(explosionPrefab, transform.parent.position, Quaternion.identity), 1f);
+            anim_door.SetBool("Open", true);
+            Destroy(target_main);
+            
 
         }
     }

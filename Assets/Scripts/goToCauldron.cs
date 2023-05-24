@@ -9,6 +9,7 @@ public class goToCauldron : MonoBehaviour
     //public ParentConstraint parentConstraint;
     protected ParentConstraint parentConstraint;
     public string tag_;
+    public bool snapped = false;
 
     Collider m_Collider;
 
@@ -28,6 +29,9 @@ public class goToCauldron : MonoBehaviour
             m_Collider.enabled = false;
             
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+            snapped = true;
+
         }
     }
 
