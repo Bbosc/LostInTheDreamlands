@@ -90,10 +90,12 @@ public class ObjectAnchor : MonoBehaviour
 		if (handType == distanceGrab.HandType.LeftHand)
 		{
 			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
+			rigidbody.velocity *= 2;
 		}
 		else
 		{
 			rigidbody.velocity = trackingSpace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+			rigidbody.velocity *= 2;
 		}
 	}
 

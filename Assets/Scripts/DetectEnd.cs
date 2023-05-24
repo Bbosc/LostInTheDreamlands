@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class DetectEnd : MonoBehaviour
 {
 
     
     static protected GameObject[] fragment_list;
-    public int nb_tot_frag = 1;
-    public GameObject temple;
+    int nb_tot_frag = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +25,10 @@ public class DetectEnd : MonoBehaviour
             }
         }
 
-        Debug.Log(nb_tot_frag);
-        Debug.Log("force");
         if (nb_frag_snap == nb_tot_frag){
-            Debug.Log("forceeeeee");
             Debug.Log(nb_frag_snap);
+            SceneManager.LoadScene("Scenes/EndScene");
+
         }
         
     }

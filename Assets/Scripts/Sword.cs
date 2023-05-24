@@ -51,7 +51,7 @@ public class Sword : MonoBehaviour
         projectiles = GameObject.FindGameObjectsWithTag("projectile");
         enemies = GameObject.FindGameObjectsWithTag("enemy");
         sword_anchor = sword; // update the default sword position when in hand
-
+        transform.position = sword_anchor.get_controller_position();
         bool activate = false;
 
         for (int i = 0; i < projectiles.Length; i++)
@@ -60,6 +60,7 @@ public class Sword : MonoBehaviour
             if (dist < 0.8)
             {
                 foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
+                transform.position = sword_anchor.get_controller_position();
                 activate = true;
             }
             else
