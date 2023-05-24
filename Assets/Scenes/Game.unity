@@ -4365,12 +4365,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5077714443264865109, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7968535631909754353, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 7817646}
     m_RemovedComponents:
     - {fileID: 6688632886329762065, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
+    - {fileID: 4091770886510771549, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
 --- !u!1 &344309023
 GameObject:
@@ -8067,12 +8072,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5077714443264865109, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7968535631909754353, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 7817646}
     m_RemovedComponents:
     - {fileID: 6688632886329762065, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
+    - {fileID: 4091770886510771549, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
 --- !u!1001 &643569684
 PrefabInstance:
@@ -21294,12 +21304,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5077714443264865109, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7968535631909754353, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 7817646}
     m_RemovedComponents:
     - {fileID: 6688632886329762065, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
+    - {fileID: 4091770886510771549, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
 --- !u!1001 &1974906666
 PrefabInstance:
