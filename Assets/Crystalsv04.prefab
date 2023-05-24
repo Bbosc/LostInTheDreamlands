@@ -809,7 +809,6 @@ GameObject:
   - component: {fileID: 5198757132489547679}
   - component: {fileID: 1323063054165325131}
   - component: {fileID: 6558181048723593309}
-  - component: {fileID: 8759492729960434034}
   - component: {fileID: 7624711754973375862}
   m_Layer: 8
   m_Name: Crystalsv04
@@ -922,18 +921,6 @@ MonoBehaviour:
   heldObjRB: {fileID: 0}
   collisionBoxes: []
   trackingSpace: {fileID: 0}
---- !u!114 &8759492729960434034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2489030696663022751}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a40266769cd8fb49a4e3c9bc0fe8008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7624711754973375862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,4 +933,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e091c9fdf8e946b2836d8f782c6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Pink_cauldron
+  tag_: Pink_cauldron

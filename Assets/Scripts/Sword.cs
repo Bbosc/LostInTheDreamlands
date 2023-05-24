@@ -82,6 +82,7 @@ public class Sword : MonoBehaviour
             {
                 activate = true;
                 foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
+                transform.position = sword_anchor.get_controller_position();
             }
             else
             {
