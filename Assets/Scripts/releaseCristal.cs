@@ -22,8 +22,8 @@ public class releaseCristal : MonoBehaviour
     void Start()
     {
         if ( fruits_in_the_scene == null ) fruits_in_the_scene = GameObject.FindGameObjectsWithTag("Fruit");
-        if ( fruits_in_the_scene == null ) potion1_in_the_scene = GameObject.FindGameObjectsWithTag("Potion");
-        if ( fruits_in_the_scene == null ) flower_in_the_scene = GameObject.FindGameObjectsWithTag("Flower");
+        if ( potion1_in_the_scene == null ) potion1_in_the_scene = GameObject.FindGameObjectsWithTag("Potion");
+        if ( flower_in_the_scene == null ) flower_in_the_scene = GameObject.FindGameObjectsWithTag("Flower");
         rb = GetComponent<Rigidbody>();
     }
 
@@ -43,7 +43,7 @@ public class releaseCristal : MonoBehaviour
         int nbr_of_flowers_at_anchor = getNumberOfObjectsAtLocation(flower_in_the_scene);
 
         if (nbr_of_fruits_at_anchor >= NBR_APPLE && nbr_of_potions1_at_anchor >= NBR_POTION && nbr_of_flowers_at_anchor >= NBR_FLOWER) {
-            rb.useGravity = true;
+            GetComponent<BoxCollider>().enabled = true;
             MeshRenderer[] cristalsMesh = GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer cristal in cristalsMesh) {
                 cristal.enabled = true;

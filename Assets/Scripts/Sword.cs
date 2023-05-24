@@ -8,6 +8,7 @@ public class Sword : MonoBehaviour
     ObjectAnchor sword_anchor;
     float dist = 0.0f;
     public bool tutorial_completed = false;
+    bool activate = false;
 
     private void Start()
     {
@@ -45,33 +46,25 @@ public class Sword : MonoBehaviour
 
     public void GrabSword(ObjectAnchor sword)
     {
-        gameObject.GetComponent<Rigidbody>().useGravity = true;
+        // gameObject.GetComponent<Rigidbody>().useGravity = true;
         // Update the list of available projectiles and ennemies
         projectiles = GameObject.FindGameObjectsWithTag("projectile");
         enemies = GameObject.FindGameObjectsWithTag("enemy");
         sword_anchor = sword; // update the default sword position when in hand
+
         bool activate = false;
-        // activate/desactivate colliders if the sword is close/far enough from the ennemies or the projectiles
-        activateSwordColliders(sword, projectiles, 0.8f, activate);
-        activateSwordColliders(sword, enemies, 2.0f, activate);
 
-        
-    }
-
-    // We activate the sword colliders only when the sword is close to an object it can interact with,
-    // otherwise it could collide with an unwanted object, e.g. a tree, and provoke a shift in the sword's position
-    void activateSwordColliders(ObjectAnchor sword, GameObject[] interactables, float activatingDistance, bool activate)
-    {
-        for (int i = 0; i < interactables.Length; i++)
+        for (int i = 0; i < projectiles.Length; i++)
         {
-            dist = Vector3.Distance(sword.gameObject.transform.position, interactables[i].gameObject.transform.position);
-            if (dist < activatingDistance)
+            dist = Vector3.Distance(sword.gameObject.transform.position, projectiles[i].gameObject.transform.position);
+            if (dist < 0.8)
             {
                 foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
                 activate = true;
             }
             else
             {
+        // activate/desactivate colliders if the sword is close/far enough from the ennemies or the projectiles
                 if (activate == false)
                 {
                     foreach (Collider col in sword.collisionBoxes) { col.enabled = false; }
@@ -80,7 +73,72 @@ public class Sword : MonoBehaviour
 
             }
         }
-    }
 
-    public bool is_tutorial_completed() { return tutorial_completed; }
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            dist = Vector3.Distance(sword.gameObject.transform.position, enemies[i].gameObject.transform.position);
+            if (dist < 2)
+            {
+                activate = true;
+                foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
+            }
+            else
+            {
+                if (activate == false)
+                {
+                    foreach (Collider col in sword.collisionBoxes) { col.enabled = false; }
+                    transform.position = sword_anchor.get_controller_position();
+                }
+            }
+
+        }
+    }
+        public bool is_tutorial_completed() { return tutorial_completed; }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//         activateSwordColliders(sword, projectiles, 0.8f);
+//         activateSwordColliders(sword, enemies, 2.0f);
+
+        
+//     }
+
+//     // We activate the sword colliders only when the sword is close to an object it can interact with,
+//     // otherwise it could collide with an unwanted object, e.g. a tree, and provoke a shift in the sword's position
+//     void activateSwordColliders(ObjectAnchor sword, GameObject[] interactables, float activatingDistance)
+//     {
+//         for (int i = 0; i < interactables.Length; i++)
+//         {
+//             dist = Vector3.Distance(sword.gameObject.transform.position, interactables[i].gameObject.transform.position);
+//             if (dist < activatingDistance)
+//             {
+//                 foreach (Collider col in sword.collisionBoxes) { col.enabled = true; }
+//                 activate = true;
+//             }
+//             else
+//             {
+//                 if (activate == false)
+//                 {
+//                     foreach (Collider col in sword.collisionBoxes) { col.enabled = false; }
+//                     transform.position = sword_anchor.get_controller_position();
+//                 }
+
+//             }
+//         }
+//     }
+
+
